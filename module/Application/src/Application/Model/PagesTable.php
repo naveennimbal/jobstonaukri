@@ -103,6 +103,19 @@ class PagesTable
 
     }
 
+    public function getMenuLink() {
+
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        //$select->where(array("page_id"=>$pageId));
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet;
+
+    }
+
+
+
 
 
     public function getDetailsByEmail($email) {

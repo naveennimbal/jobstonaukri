@@ -195,7 +195,6 @@ class Module
         return;
     }
 
-
     public function initSession($config)
     {
         $sessionConfig = new SessionConfig();

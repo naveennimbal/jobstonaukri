@@ -46,8 +46,16 @@ class PagesController extends AbstractActionController{
         $request = $this->getRequest();
         $result = array();
         $page = $this->getPagesTable()->getPageById($pageId);
-        return new ViewModel(array("page"=>$page));
+        $menu = $this->getSideMenu();
+        return new ViewModel(array("page"=>$page,"menu"=>$menu));
        // var_dump($pageId); exit;
+
+    }
+
+
+    public function getSideMenu(){
+        $menu = $this->getPagesTable()->getMenuLink();
+        return $menu;
 
     }
 
