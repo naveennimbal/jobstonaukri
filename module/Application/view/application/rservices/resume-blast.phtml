@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">Resume Blast</h3><br>
+        <strong>Increase Your Reach amongst Job Consultants in India or Gulf</strong><br><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	"> Resume Blast India or Gulf is a resume distribution service that helps you get noticed by job consultants and recruiters, registered on <a href="#">Jobsspeed.com</a>. Your Resume gets published across the India + Gulf. <br><br>
+
+            <strong>Key Features</strong><br>
+        </p><ul style="font-size:15px; line-height:30px;">
+            <li style="list-style:disc;">In <strong>Resume Blast</strong> your profile and Resume will be <strong>email to relevant top consultants.</strong> Once the consultant's requirements are found relevant to your profile, your resume is emailed to these consultants within Three Business of service activation. This relevance is the based on your Functional Area, Location, and Work experience that you specify at the time of placing your order.</li>
+        </ul>
+        <br><br>
+        <strong>Service charges: - For India: - 1900/-INR   OR   Amount for Gulf: - 1350/- INR   </strong><br><br>
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                    foreach($packages as $pack){
+                        $pack = (object)$pack;
+                        // var_dump($pack); exit;
+                        $serviceId = $pack->serviceId;
+                        $serviceName = $pack->serviceName;
+
+                        if($x==0) {
+                            ?>
+                            <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                            <?php
+                            $x=1;
+                        } // service name ends here
+                        ?>
+
+                        <h5><input type="radio" name="price" id="price" value="<?php echo $pack->price?>-<?php echo $pack->servicePriceId?>"> &nbsp; For <?php echo $pack->country ?>  : <?php echo $pack->price ?></h5>
+
+                        <?php
+                    }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                </form>
+            </h4>
+
+
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>

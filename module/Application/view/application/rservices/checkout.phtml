@@ -1,0 +1,63 @@
+<div class="row" >
+
+
+    <div class="col-md-12 min-height-400">
+        <h3 class="bottom-margin-5"></h3><br>
+        <h4 style="text-align: center">
+            Please wait while we redirect you  to payment gateway
+        </h4>
+
+        <form id="clickme" name='clickme' action='https://pay.shmart.in/checkout/v2/wallettransactions' method='post'>
+            <input type="hidden" id = "amount" name='amount' value="<?php echo $vals["amount"] ?>">
+            <input type="hidden" name='currency_code' value="INR">
+            <input type="hidden" name='merchant_refID' value="<?php echo $vals["orderId"] ?>">
+            <input type="hidden" id="email" name="email" value="<?php echo $vals["email"] ?>">
+            <input type="hidden" name="mobileNo" value="<?php echo $vals["mobile"] ?>">
+            <input type="hidden" name='apikey' value="8a09527944eadca80a3154c453dfe237">
+            <input type="hidden" name='checksum' value="<?php echo $vals["checksum"] ?>">
+            <input type="hidden" name='checksum_method' value="MD5">
+            <input type="hidden" name='ip_address' value="<?php echo $vals["ip"] ?>">
+            <input type="hidden" id="f_name" name="f_name" value="<?php echo $vals["firstName"] ?>">
+            <input type="hidden" name="city" value="<?php echo $vals["city"] ?>">
+            <input type="hidden" name="state" value="<?php echo $vals["state"] ?>">
+            <input type="hidden" name="country" value="India">
+            <input type="hidden" name="zipcode" value="<?php echo $vals["zipcode"] ?>">
+
+            <input type="hidden" name="merchant_id" value="TSV72944452">
+            <input type="hidden" id = "address" name="address" value="<?php echo $vals["city"] .",", $vals['state'] ?>">
+            <input type="hidden"  name="app_used" value="PAY_BY_SHMART">
+            <input type="hidden"  name="authorize_user" value="1">
+
+
+
+
+
+            <input type="hidden" name='reference_no' value="<?php echo $vals["orderId"] ?>">
+
+
+            <input type="hidden" id="description" name='description' value="<?php echo $vals["description"] ?>">
+            <input type="hidden" name='rurl' value="<?php echo $vals["returnUrl"] ?>">
+            <input type="hidden" name='mode' value="<?php echo $vals["mode"] ?>">
+
+
+
+            </form>
+
+            </div>
+
+
+
+    </div>
+
+
+
+
+</div>
+<script>
+
+    $(document).ready(function(){
+        $("#clickme").submit();
+
+    });
+
+</script>

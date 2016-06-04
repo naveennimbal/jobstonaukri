@@ -1,0 +1,130 @@
+
+<div id="content" style="min-height: 81px;">
+    <div id="title">
+        <h1 class="inner title-2">Sign Up
+            <!--<ul class="breadcrumb-inner">
+                <li> <a href="index.html">Home</a></li>
+                <li> <a href="contacts.html">Sign Up </a></li>
+            </ul> -->
+        </h1>
+    </div>
+    <div class="inner">
+
+        <link href="<?php echo $this->basepath('css/forms.css')?>" type="text/css" rel="stylesheet">
+
+            <!-- Content Right -->
+            <div class="content formWrapper beautyforms">
+                <div class="block background " style="background-image:url(' <?php echo $this->basepath('css/dark_wall.png') ?>');">
+                   <!-- <h1 class="">Sign Up</h1> -->
+                   <br>
+
+                    <p>Sign up for a great Stint </p>
+
+
+
+                    <div class="block-content beautyforms">
+                        <?php 
+                            if(isset($result ) && $result == "success"){
+                        ?>
+                        <div style="text-align:center;"> 
+                            <h1> Thank You  Naveen for Siging Up <br> </h1>
+                        
+                        </div>
+                            <?php } else {?>
+                        <form class="form" method="post" action="<?php echo $this->url("register");?>" id="regform">
+                            <input type="text" class="name validate[required,custom[fullname]]" id="cname" placeholder="Name" name="cname">
+                            <div>
+                                <p class="name-help">Please enter your first and last name.</p>
+                            </div>
+                            <input type="email" class="email validate[required,custom[email]]" placeholder="Email" id="email" name="email">
+                            <div>
+                                <p class="email-help">Please enter your current email address.</p>
+                            </div>
+                            <input type="password" class="passwd validate[required]" placeholder="Password" name="passwd" id="passwd">
+                            <div>
+                                <p class="passwd-help">Please make a password.</p>
+                            </div>
+                            <input type="password" class="cpasswd validate[required,equals[passwd]]" placeholder="Confirm Password" name="cpasswd">
+                            <div>
+                                <p class="cpasswd-help">Please confirm your password.</p>
+                            </div>
+                            <input type="button" class="su" id="regSubmit" value="Register" style="">
+                        </form>
+                        <br/><br/><br>
+                            <?php
+                                }
+                            ?>     
+
+                    </div>
+                </div>
+            </div>
+            <!-- /Content Right -->
+
+            <div class="clear"></div>
+            <!-- Clear Line -->
+
+        </div>
+        <!-- /Content Inner -->
+
+    </div>
+</div>
+<script>
+    $(document).ready(function(){
+        $(".name").focus(function(){
+            $(".name-help").slideDown(500);
+        }).blur(function(){
+            $(".name-help").slideUp(500);
+        });
+
+        $(".email").focus(function(){
+            $(".email-help").slideDown(500);
+        }).blur(function(){
+            $(".email-help").slideUp(500);
+        });
+
+        $(".passwd").focus(function(){
+            $(".passwd-help").slideDown(500);
+        }).blur(function(){
+            $(".passwd-help").slideUp(500);
+        });
+
+        $(".cpasswd").focus(function(){
+            $(".cpasswd-help").slideDown(500);
+        }).blur(function(){
+            $(".cpasswd-help").slideUp(500);
+        });
+
+
+    })
+
+    $(document).ready(function(){
+        $("#regSubmit").click(function(){
+            $("#regform").submit();
+        })
+        
+       $("#regform").validationEngine('attach', {
+				onValidationComplete: function(form, status){
+					if(status == true){
+                                           // console.log(form);
+                                           //posform(); 
+                                          // $(form).submit();
+                                          return true;
+                                        }
+				}  
+			}) 
+
+    });
+    
+    function posform(){
+        $.ajax({
+            method: "POST",
+            url: "<?php echo  $this->url("register",array("action"=>"index")); ?>",
+            data: $("#regform").serialize(),
+            beforeSend:function(){},
+            complete:function(data){
+                console.log(data);
+            }
+        })
+    }
+
+</script>

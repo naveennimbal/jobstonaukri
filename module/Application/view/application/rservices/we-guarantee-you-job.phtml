@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">We Guarantee You a Job</h3><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	"> <strong>Why should you buy?</strong><br>
+            Our service provides <strong>Job Search Guidance</strong>  for Job Aspirants backed by a <strong>GAURANTEE</strong> (or 50% Refund) to find you a JOB within 6 months.<br><br>
+
+            <strong>ASPIRATION as a Recruitment Agency</strong> is well established with excellent relations built in the marketplace for the past 10 years plus. There are systems and processes which are tried and tested in successfully recruiting suitable talent across junior, middle and senior management levels. We understand what employers seek in a candidate and our team has an in depth experience of the various steps which are critical for a candidate to find a JOB. <br><br>
+
+            <strong> We are guaranteed a JOB within 6 months or 50% amount would be refunded.</strong><br><br>
+
+
+            <strong>WHAT W'ILL YOU GET?</strong><br>
+        </p><ul style="font-size:15px; line-height:30px;">
+            <li style="list-style:disc;">Guarantee of a Job within 6 months ( or else a 50% REFUND)</li>
+            <li style="list-style:disc;">Resume Blast</li>
+            <li style="list-style:disc;">Improved number of Interview calls</li>
+            <li style="list-style:disc;">Higher Hit Rate at interviews</li>
+            <li style="list-style:disc;">Ability to present better value to prospective employer</li>
+        </ul>
+        <br><br>
+        <strong>Service charges: - 51000/- INR</strong><br><br>
+        <em>Please Not: - Ones we received your Order your services will be activated within 7 Business days.</em>
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                    foreach($packages as $pack){
+                        $pack = (object)$pack;
+
+
+                        if($x==0) {
+
+                            ?>
+                            <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                            <?php
+                            $x=1;
+                        } // service name ends here
+                        ?>
+
+                        <h5><input style="display: none" checked="checked" type="radio" name="price" id="price" value="<?php echo $pack->price?>-<?php echo $pack->servicePriceId?>"> &nbsp;<strong> Price  : <?php echo $pack->price ?> </strong></h5>
+
+                        <?php
+                    }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                </form>
+            </h4>
+
+
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>

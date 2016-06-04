@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Jobsspeed</title>
+ <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+<link href="<?php echo $this->basepath('css/bootstrap.css')?>" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo $this->basepath('css/main.css')?>">
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+	
+	<script type="text/javascript" src="<?php echo $this->basepath('js/jquery.min.js')?>"></script>
+	<script type="text/javascript" src="<?php echo $this->basepath('js/actions.js')?>"></script>
+</head>
+  <body>
+
+	<div id="wrapper">
+		<div id="header">
+		
+			
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 text-right">
+			
+						<div class="pull-left">
+							<div class="logo">
+<a class="navbar-brand text-logo custom-color" href="#">Site Name</a></div>
+						</div>
+						<!--main navigation menu-->	
+						<div class="pull-right visible-xs visible-sm menu-top-margin">
+							<a href="javascript:ShowHide('nav_menu')" class="expand_menu_link"><img src="<?php echo $this->basepath('images/menu-grid.gif')?>" alt="expand menu"/> &nbsp; MENU</a>
+							
+						</div>
+					
+							
+							
+						<div id="nav_menu" class="pull-right hide-sm">
+					
+							
+							
+							<ul class="menu nav navbar-nav top-menu">
+															
+							<li><a class="main-top-link" href="#">Home</a> </li>
+							<li><a class="main-top-link" href="<?php echo $this->url('rservices')?>">Our Services</a> </li>
+							<li><a class="main-top-link" href="#">Jobseekers</a> </li>
+							<li><a class="main-top-link" href="#">Employers</a> </li>
+							<li><a class="main-top-link" href="#">About us</a> </li>
+							<li><a class="main-top-link" href="#">News</a> </li>
+							<li><a class="main-top-link" href="#">Contact</a> </li>
+								<?php
+								if (isset($username)){
+
+								?>
+									<li><a href="#"> <?php echo $username->firstName ?> </a> </li>
+								<?php
+								} else {
+								?>
+									<li><button type="button" class="login-trigger btn btn-primary custom-back-color" data-toggle="modal" data-target="#login-modal">LOG IN</button></li>
+								<?php } ?>
+
+							</ul>
+						
+						
+						</div>
+						<!--end main navigation menu-->
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	
+		
+	
+	<style>
+	#home_panel_wrap
+	{
+		background-image:url(<?php echo $this->basepath('images/1.jpg')?>);
+	}
+	</style>
+	<div id="home_panel_wrap">
+		<div>
+	
+		
+	
+<div id="myCarousel" class="carousel slide">
+  
+	
+	<div id="slider_container" class="carousel-inner">
+	 	<div  class="item active slide-back">
+			<div class="container">
+				<div class="xcarousel-caption">
+				<a class="carousel-link" href="#"><img class="slide-product-image img-responsive right-margin-40"     src="<?php echo $this->basepath('images/20593860.jpg')?>" alt="Bloomweb" align="left"/><h1 class="no-top-margin carousel-link add-shadow">IOS Developer Required</h1>
+				  <p class="hide-sm add-shadow">Job Description&nbsp;Send me Jobs like this- Deliver across the entire app life cycle - concept, design, build, deploy, test, release to app stores and support- Work with senior developers on the work package effort estimation- ...</p>
+					</a>
+				 <br/>
+				</div>
+			</div>
+		</div><div  class="item  slide-back">
+			<div class="container">
+				<div class="xcarousel-caption">
+				<a class="carousel-link" href="#"><img class="slide-product-image img-responsive right-margin-40" src="<?php echo $this->basepath('images/92767745.jpg')?>" alt="Dell Inc" align="left"/><h1 class="no-top-margin carousel-link add-shadow">Client Technical Support Associate</h1>
+				  <p class="hide-sm add-shadow">The Client Technical Support Specialist is responsible for providing telephone/email/chat, online, social media and remote diagnostic technical support of desktops, portables, peripherals (e.g., printers, projectors, etc.) and software custom or off the shelf software – ...</p>
+					</a>
+				 <br/>
+				</div>
+			</div>
+		</div><div  class="item  slide-back">
+			<div class="container">
+				<div class="xcarousel-caption">
+				<a class="carousel-link" href="#"><img class="slide-product-image img-responsive right-margin-40" src="<?php echo $this->basepath('images/92767745.jpg')?>" alt="Dell Inc" align="left"/><h1 class="no-top-margin carousel-link add-shadow">Administrative Analyst</h1>
+				  <p class="hide-sm add-shadow">The Administrative Analyst Performs administrative support for 2 leaders within the Enterprise Solutions organization. The Analyst prepares correspondence, presentations, and reports. Composes routine correspondence and memoranda. Maintains confidential records and information.
+ 
+Responsibilities include:
+-   ...</p>
+					</a>
+				 <br/>
+				</div>
+			</div>
+		</div>	</div>
+	
+		  <a class="left carousel-control" href="#myCarousel" data-slide="prev"><img src="<?php echo $this->basepath('images/carousel-arrow-left.png')?>" alt="" class="carousel-icon"/></a>
+	  <a class="right carousel-control" href="#myCarousel" data-slide="next"><img src="<?php echo $this->basepath('images/carousel-arrow-right.png')?>" alt="" class="carousel-icon"/></a>
+	</div>
+<script type="text/javascript">
+
+
+if(document.getElementById("myCarousel"))
+{
+	$(document).ready(function() 
+	{
+		$('.carousel').carousel({
+		  interval: 9000		})
+	
+	});
+}
+</script>
+
+
+
+</div>
+
+<div class="search-form-wrap">
+
+<div class="container">
+	<div class="text-center">
+	<h4 class="white-font bottom-margin-5">Search for Jobs</h4>
+	</div>
+	<form name="home_form" id="home_form" action="index.php"  style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px" method="post"> 
+	<input type="hidden" name="mod" value="search">
+	<input type="hidden" name="search" value="1">
+	<input type="hidden" name="advanced" id="advanced_s" value="0">
+
+		<div class="col-md-11 form-group group-1">
+			<span class="main-search-label"><br/></span>
+			
+			<input type="text" name="job_title" class="input-job" placeholder="Keyword">
+		</div>
+
+		<div class="col-md-1 no-padding">
+			<span class="main-search-label"><br/></span>
+			<button type="submit" class="btn custom-gradient-2 btn-default btn-green pull-right no-margin">Search</button>
+		
+		</div>
+				
+		<div class="clearfix"></div>
+		
+	</form>
+</div>
+</div>
+</div>
+
+		
+	
+	
+			<div class="container main-container">
+
+				<?php echo $this->content;?>
+
+			</div>
+	
+		
+		
+		
+		
+	
+				
+			
+	
+		
+			<br/>
+<div id="companies-carousel">
+	<div class="container text-center">
+				
+	
+	<script type="text/javascript">
+	var companies_carousel_itemList = [
+		{url: "<?php echo $this->basepath('images/20593860.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/28826734.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/92767745.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/20593860.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/28826734.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/92767745.jpg')?>", title: "", link: "#"}
+		
+		,
+		{url: "<?php echo $this->basepath('images/20593860.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/28826734.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/92767745.jpg')?>", title: "", link: "#"}
+		
+		
+		,
+		{url: "<?php echo $this->basepath('images/20593860.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/28826734.jpg')?>", title: "", link: "#"}
+
+		,
+		{url: "<?php echo $this->basepath('images/92767745.jpg')?>", title: "", link: "#"}
+
+
+		
+
+			];
+	</script>
+	<script src="<?php echo $this->basepath('js/carousel.js')?>"></script>
+	
+	<h3 class="bottom-margin-5">Featured Companies</h3>
+	<div id="ads-rotator"  >
+	<br/>
+
+		<div id="wrap">
+			<ul id="companies_carousel"  class="jcarousel-skin-ie7">
+		
+			</ul>
+		</div>
+	</div>
+
+	
+	<div class="clear"></div>	
+	
+	</div>
+</div>
+	
+		
+		<div class="footer custom-back-color default-back-color">
+			
+			<div class="container">
+				<div class="row">
+				
+					<div class="col-md-4 bottom-links">
+						<h4 class="widget-title white-font">Quick Links</h4>
+						<div class="bottom-links-nav">
+							
+							<ul>
+								
+				<li>
+					<a href="#">Home</a>
+				</li>
+			
+				<li>
+					<a href="#">Courses</a>
+				</li>
+			
+				<li>
+					<a href="#">Jobseekers</a>
+				</li>
+			
+				<li>
+					<a href="#">Employers</a>
+				</li>
+			
+				<li>
+					<a href="#">About us</a>
+				</li>
+			
+				<li>
+					<a href="#">News</a>
+				</li>
+			
+				<li>
+					<a href="#">Contact</a>
+				</li>
+			
+							</ul>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					
+					
+					
+					
+					
+					<div class="col-md-4 bottom-links">
+						<h4 class="widget-title white-font">Latest News</h4>
+						
+								<a href="#"><h4>This is a test news</h4></a>
+	<span class="sub-text">
+	Some content of the news comes here<a href="#">...</a>
+	</span>
+	<br/>
+						
+					</div>
+					
+					<div class="col-md-4 bottom-links">
+						<h4 class="widget-title white-font">Connect with us</h4>
+					
+						<div class="textwidget">
+							<a href="#"><img src="<?php echo $this->basepath('images/facebook-icon.png')?>" class="bottom-icon"/></a>
+                            <a href="#"><img src="<?php echo $this->basepath('images/twitter-icon.png')?>" class="bottom-icon"/></a>
+                            <a href="#"><img src="<?php echo $this->basepath('images/googleplus-icon.png')?>" class="bottom-icon"/></a>
+						</div>
+						
+					</div>
+
+					
+				</div>
+				<div class="clearfix"></div>
+			
+				
+			</div>	
+			
+		</div>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="footer-credits text-center white-font pull-right">
+							jobsspeed.com &copy; 2016
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<script src="<?php echo $this->basepath('js/functions.js')?>"></script>
+	<script src="<?php echo $this->basepath('js/bootstrap.min.js')?>"></script>
+
+	    <div class="modal modal-login"  id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" onclick="javascript:document.getElementById('login-modal').style.display='none'" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 id="loginModalLabel" class="modal-title text-center">Log in to your account</h4>
+                </div>
+                <div class="modal-body">
+                 
+                    <div class="login-form-container">
+                 
+
+						<form class="login-form" action="#" method="post" id="loginForm" >
+							<input type="hidden" name="mod" value="login"/>
+						
+															<input type="hidden" name="lang" value="en">
+							
+			
+                            <div class="form-group email">
+                                <label class="sr-only" for="login-email">Your Email</label>
+								<img src="<?php echo $this->basepath('images/icon-user.gif')?>" alt="" class="login-icon"/>
+                                <input id="login-email" name="email" type="text" class="form-control login-email" placeholder="Your Email">
+                            </div>
+                            <div class="form-group password">
+                                <label class="sr-only" for="login-password">Password</label>
+								<img src="<?php echo $this->basepath('images/icon-password.gif')?>" alt="" class="login-icon"/>
+                                <input id="login-password" name="password" type="password" class="form-control login-password" placeholder="Password">
+                                <p class="forgot-password">
+                                   <a class="underline-link" href="#">Forgotten password?</a> 
+                                </p>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-block btn-primary custom-back-color">LOG IN</button><br>
+							<div class="form-group">
+								<p> <strong class="loginStatus" style="text-align: center" > </strong></p>
+							</div>
+                        
+                        </form>
+                    </div>
+					
+					<br/>
+                </div>
+				
+				<br/>
+                <div class="modal-footer">
+                    <p>
+						<a class="underline-link" href="<?php echo $this->url("register",array("action"=>"index"))?>">Create your job seeker account</a>
+						 or 
+						<a class="underline-link" href="#">Sign up as an employer</a>
+					
+					</p>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+	
+</body>
+</html>

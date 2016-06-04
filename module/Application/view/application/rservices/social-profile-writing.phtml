@@ -1,0 +1,99 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">Social Profile Writing </h3><br>
+        <strong>Get a strong professional identity - Online</strong><br><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	">Social Profiler Writing is a personalized social profile writing that gets you noticed by the people who matter and help you take the next step in your career. A professionally created Social Profile allows you to have a professional and polished online presence that serves as a means to share your skills, education and career interests with potential employers.
+
+
+
+
+            <br><br>
+            <strong>Key features</strong><br>
+        </p><ul style="font-size:15px; line-height:30px;">
+            <li style="list-style:disc;">Detailed telephonic discussion with experts to understand your profile.</li>
+            <li style="list-style:disc;">Make a strong impact with a headline, powerful summary and keyword rich profile.</li>
+            <li style="list-style:disc;">Showcase your vision, core values and aspirations.</li>
+            <li style="list-style:disc;">Be noticed for relevant career opportunities by top recruiters..</li>
+        </ul>
+        <br><br>
+        <strong>Remember - It is different and at times more important than your Resume.</strong><br><br>
+
+        While resume gives an overview of your work experience and education, your LinkedIn profiles provides a much better overview of your professional identity - both an employee and as an individual. It also 'talks' to relevant people (and recruiters) about your vision and career goal. It is therefore a more holistic overview of the 'professional' you.<br><br>
+
+        Professional social media websites becoming a major and a critical headhunting ground, it's important to maintain control of your own identity on the social web. The deeper and more in-depth your presence is on social media websites, the easier it is for the 'right professionals' to find you.
+        A strong and accurate social media presence may result in career opportunities coming your way. In a way you are making yourself better visible to companies looking for your kind of profiles to find you, contact you and employ you!<br><br>
+
+        Social Profiler is a Professional and personalized Social media profile writing service that endeavors to provide you a strong and accurate presence on popular professional Social networking Websites such as LinkedIn.<br><br>
+
+        Herein we understand your profile, your aspirations and deliver a professional + comprehensive write-up. This is crafted as per your Resume and engaging telephonic discussions conducted by us. Our writers with the right knowledge and know-how of social media and with 10 years of profile writing experience crafts your Social Media Profile
+        <br><br>
+
+        <strong>LinkedIn, Twitter, Facebook, Google+</strong> and are some of the popularly used social networking websites, with <strong>LinkedIn is the largest professional networking website having 187 Million people across the globe including 17+ Million in India. Also more than 2.6 million companies have LinkedIn Company Pages.</strong><br><br>
+        <strong>Service charges: - 4700/- INR</strong>
+
+
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                    foreach($packages as $pack){
+                        $pack = (object)$pack;
+
+
+                        if($x==0) {
+
+                            ?>
+                            <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                            <?php
+                            $x=1;
+                        } // service name ends here
+                        ?>
+
+                        <h5><input style="display: none" checked="checked" type="radio" name="price" id="price" value="<?php echo $pack->price?>-<?php echo $pack->servicePriceId?>"> &nbsp;<strong> Price  : <?php echo $pack->price ?> </strong></h5>
+
+                        <?php
+                    }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                </form>
+            </h4>
+
+
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>

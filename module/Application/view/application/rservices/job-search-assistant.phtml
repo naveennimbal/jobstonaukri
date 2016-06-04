@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">Job Search Assistant</h3><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	">Job Search Assistant where we go extra mile for candidates) service works as your personal Relationship Manager providing <br><br>
+
+        </p><p style="text-align:justify; font-size:15px; line-height:25px;	">Tailored value addition at every step of your job seeking - right from Job Search, profile optimization to company research. <br><br>
+
+        </p><p style="text-align:justify; font-size:15px; line-height:25px;	">Job Search Management is equipped to efficiently manage your job hunt so that you reach your career goals effortlessly.<br><br>
+
+            <strong>Our team of experienced professionals who come from HR/ Recruitment background works as your Relationship Manager.</strong><br>
+        </p><ul style="font-size:15px; line-height:30px;">
+            <li style="list-style:disc;">The Relationship Manager working with you who will have interactions with you in span of 6 months to start your job search.</li>
+            <li style="list-style:disc;">The Relationship Manager search for the relevant and matching job vacancies using your profile details, preferences and on the basis of market availability.</li>
+            <li style="list-style:disc;">The Relationship Manager will submit applications on your behalf, once you approve the job which has been searched by him/her and your  Relationship Manager will also  provides the Company Profile details to you  on the basis of availability</li>
+        </ul><br><br>
+        Personal Relationship Manager will get in touch with you within 48 to 72 Business working hours of Order Activation. Relationship <br><br>
+        Manager will take your profile information and job preferences details in order to initiate your Job Search Assistant Services.
+
+
+
+        <br><br>
+        <strong>Service charges: - Rs 11000/- INR </strong><br><br>
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                        foreach($packages as $pack){
+                           $pack = (object)$pack;
+                            $serviceId = $pack->serviceId;
+                            $serviceName = $pack->serviceName;
+
+                           if($x==0) {
+
+                               ?>
+                               <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                               <?php
+                               $x=1;
+                           } // service name ends here
+                         ?>
+
+                            <h5><input style="display: none" checked="checked" type="radio" name="price" id="price" value="<?php echo $pack->price?>-<?php echo $pack->servicePriceId?>"> &nbsp; Price  <?php echo $pack->price ?></h5>
+
+                    <?php
+                        }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                    </form>
+            </h4>
+
+
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>

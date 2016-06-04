@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">Resume Writing India</h3><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	">An experienced professional resume writer will develop your resume that will highlight your achievements, strengths, elaborate work experiences, key responsibilities, loaded with industry keywords and describe your job profile to employers/ recruiters, so that you get maximum responses for your profile.<br><br>
+
+            The professional resume writer conducts an in-depth analysis of your resume. The writer will contact you to get information on your desired job profile, target area, projects undertaken and achievements. In case you want to provide additional information to us; you can also get in touch with the writer directly or send across a mail to <a href="#">support@Jobsspeed.com</a>
+
+            <br><br>
+            The expert Resume writer develops a revised and professionally formatted resume according to industry standards. The first developed draft of your resume will be sent to you for your approval and feedback. In case you require any further modification, alteration in your first draft you can contact the writer or send mail to <a href="#">support@Jobsspeed.com</a>
+
+            <br><br>
+            Once you approve the developed resume we send you the final resume to your email id.
+
+            <br><br>
+            Your resume writing process starts only after we receive your payment and updated resume. Once the process starts, the time taken for us to send you the first draft is as per the services you have availed. If we receive your approval, we send you the final resume on your email id. In case of changes, the changes will be incorporated and final draft will be sent to you for approval. The changing/ development process of your resumes continues until you get a resume that you are completely satisfied with. The delivery time for various services is as below:
+
+            <br><br>
+        </p><ul style="font-size:15px; line-height:30	px;">
+            <li style="list-style:disc;">Express Resume Writing - 48 working hours (1000 /- INR)</li>
+            <li style="list-style:disc;">Resume Writing without any express add-on - 5 working days</li>
+            <li style="list-style:disc;">Service charges: - as pr candidate work experience</li>
+        </ul>
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                    foreach($packages as $pack){
+                        $pack = (object)$pack;
+                        $serviceId = $pack->serviceId;
+                        $serviceName = $pack->serviceName;
+
+                        if($x==0) {
+
+                            ?>
+                            <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                            <?php
+                            $x=1;
+                        } // service name ends here
+                        if($pack->minExp >= 10 ){
+                            ?>
+                            <h5><input type="radio" name="price" id="price"
+                                       value="<?php echo $pack->price ?>-<?php echo $pack->servicePriceId ?>">
+                                &nbsp; <?php echo $pack->minExp ?> + Years
+                                : <?php echo $pack->price ?></h5>
+
+                            <?php
+
+                        } else {
+                            ?>
+
+                            <h5><input type="radio" name="price" id="price"
+                                       value="<?php echo $pack->price ?>-<?php echo $pack->servicePriceId ?>">
+                                &nbsp; <?php echo $pack->minExp ?> - <?php echo $pack->maxExp ?> Years
+                                : <?php echo $pack->price ?></h5>
+
+                            <?php
+                        }
+                    }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                </form>
+            </h4>
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>

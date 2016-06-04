@@ -1,0 +1,98 @@
+<div class="row">
+    <div class="col-md-8 min-height-400">
+        <h3 class="bottom-margin-5">Visual Resume</h3><br>
+        <strong>Upgrade to Visual Resume to Showcase the Best of You</strong><br><br>
+        <p style="text-align:justify; font-size:15px; line-height:25px;	"> Attract more recruiters with your Resume by improving the way it represents you. Visual Resume Premium will deliver:<br><br>
+
+            1.	<strong>Visual Resume -</strong> A High Impact Resume with relevant images supporting your Resume that enhances the appeal of ‘You’ and help you gain a competitive edge.<br><br>
+
+            2.	<strong>Visual Resume -</strong> The most sought after Professional Resume designed by our team of Resume Experts preferred by many Recruiters.<br><br>
+            <strong>Key Features</strong><br>
+        </p><ul style="font-size:15px; line-height:30px;">
+            <li style="list-style:disc;">Showcase your skills and achievements with high impact visuals* supporting text details.</li>
+            <li style="list-style:disc;">A Professional Resume as per Indian recruitment standards</li>
+            <li style="list-style:disc;">Multiple detailed telephonic consultations with Resume Writer</li>
+            <li style="list-style:disc;">First draft in delivered in 10 working days.</li>
+            <li style="list-style:disc;">Free Cover Letter to highlight your accomplishments and suit your job search</li>
+        </ul>
+
+        <strong>Visuals may include your professional photo, images of awards, certifications, articles, or papers published.</strong><br><br>
+        <p></p>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <center>
+            <site bottom_banners="">
+            </site></center>
+    </div>
+
+    <div class="col-md-4">
+
+        <div class="gray-wrap">
+
+            <h4 class="aside-header">
+                <form action="<?php echo $this->url('rservices',array('controller'=>'rservices','action'=>'checkout'))?>" method="POST">
+
+                    <?php
+                    $x= 0;
+                    $serviceId = "";
+                    $serviceName = "";
+                    foreach($packages as $pack){
+                        $pack = (object)$pack;
+                        $serviceId = $pack->serviceId;
+                        $serviceName = $pack->serviceName;
+
+                        if($x==0) {
+
+                            ?>
+                            <h3><?php echo $pack->serviceName ?></h3> <br>
+
+
+                            <?php
+                            $x=1;
+                        } // service name ends here
+                        if($pack->minExp >= 10 ){
+                            ?>
+                            <h5><input type="radio" name="price" id="price"
+                                       value="<?php echo $pack->price ?>-<?php echo $pack->servicePriceId ?>">
+                                &nbsp; <?php echo $pack->minExp ?> + Years
+                                : <?php echo $pack->price ?></h5>
+
+                            <?php
+
+                        } else {
+                            ?>
+
+                            <h5><input type="radio" name="price" id="price"
+                                       value="<?php echo $pack->price ?>-<?php echo $pack->servicePriceId ?>">
+                                &nbsp; <?php echo $pack->minExp ?> - <?php echo $pack->maxExp ?> Years
+                                : <?php echo $pack->price ?></h5>
+
+                            <?php
+                        }
+                    }
+                    ?>
+                    <input type="hidden" name="serviceName" id="serviceName" value="<?php echo $serviceName ?>">
+                    <input type="hidden" name="serviceId" id="serviceId" value="<?php echo $serviceId ?>">
+                    <input type="submit" value="Proceed to payment" class="btn custom-gradient-2 btn-default btn-green" style="margin-left:20px; ">
+                </form>
+            </h4>
+
+
+            <br>
+        </div>
+
+
+
+        <br>
+        <h3 class="aside-header">
+            Advertisements
+        </h3>
+        <hr class="top-bottom-margin">
+
+        <site side_column_banners="">
+
+        </site></div>
+    <div class="clearfix"></div>
+</div>
