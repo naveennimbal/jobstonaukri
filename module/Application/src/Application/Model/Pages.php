@@ -10,6 +10,7 @@ namespace Application\Model;
  {
     
     public $page_id ;
+    public $pageTitle ;
     public $content;
     public $status;
     
@@ -25,6 +26,7 @@ namespace Application\Model;
      {
         
         $this->page_id = (isset($data['page_id'])) ? $data['page_id'] : "";
+        $this->pageTitle = (isset($data['pageTitle'])) ? $data['pageTitle'] : "";
         $this->content = (isset($data['content'])) ? $data['content'] : "";
         $this->status = (isset($data['status'])) ? $data['status'] : "";
         
@@ -53,6 +55,20 @@ namespace Application\Model;
 
                          ),
                      ));
+
+             $inputFilter->add(array(
+                         'name'     => 'pageTitle',
+                         //'required' => true,
+                         'filters'  => array(
+                             array('name' => 'StripTags'),
+                             array('name' => 'StringTrim'),
+                         ),
+                         'validators' => array(
+
+                         ),
+                     ));
+
+
 
             $inputFilter->add(array(
                          'name'     => 'content',
