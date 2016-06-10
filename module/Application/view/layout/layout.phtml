@@ -76,12 +76,12 @@
   <div class="inner">
 
     <!-- Logo -->
-    <div id="logo"> <a href="index.html"><img width="205" height="50" alt="logo" src="<?php echo $this->basePath('/images/Logo.png')?>"></a><a class="menu-hider"></a></div>
+    <div id="logo"> <a href="<?php echo $this->basepath?>"><img width="205" height="50" alt="logo" src="<?php echo $this->basePath('/images/Logo.png')?>"></a><a class="menu-hider"></a></div>
     <!-- /Logo -->
 
     <ul id="navigation">
-      <li> <a href="index.html">Home</a></li>
-      <li class="first expanded current"><a href="jobs.html">Jobs<span class="dropdown"></span></a>
+      <li> <a href="<?php echo $this->basepath?>">Home</a></li>
+     <!-- <li class="first expanded current"><a href="jobs.html">Jobs<span class="dropdown"></span></a>
         <ul class="submenu" style="display: none;">
           <li><a href="jobs.html">Job listing</a></li>
           <li><a href="job.html">Job Details</a></li>
@@ -94,9 +94,10 @@
           <li><a href="candidate.html">Candidate</a></li>
         </ul>
       </li>
-      <li><a href="partners.html">Partners</a></li>
-      <li><a href="about-us.html">About Us</a></li>
-      <li><a href="contacts.html">Contact</a></li>
+
+      <li><a href="partners.html">Partners</a></li> -->
+      <li><a href="<?php echo $this->url('pages',array('id'=>4))?>">About Us</a></li>
+      <li><a href="<?php echo $this->url('pages',array('id'=>3))?>">Contact</a></li>
     </ul>
   </div>
 </div>
@@ -116,14 +117,14 @@
       <section class="inner">
         <div id="site-description">
           <h3><img width="205" height="50" alt="" src="images/Logo.png"></h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Praesent sodales velit quis augue. Cras suscipit.</p>
+          <!--<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Praesent sodales velit quis augue. Cras suscipit.</p>-->
         </div>
         <div id="footer-menu">
           <div class="footer-menu span3" id="nav-menu">
             <h2>Navigation</h2>
             <div class="left">
               <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="<?php echo $this->basepath?>">Home</a></li>
                 <li><a href="job-listing-1.html">Jobs</a></li>
                 <li><a href="partners.html">Partners</a></li>
                 <li><a href="about-us.html">About Us</a></li>
@@ -131,9 +132,9 @@
             </div>
             <div class="right">
               <ul>
-                <li><a href="contacts.html">Contact Us</a></li>
-                <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
-                <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                <li><a href="<?php echo $this->url('pages',array('id'=>3))?>">Contact Us</a></li>
+                <li><a href="<?php echo $this->url('pages',array('id'=>2))?>">Terms &amp; Conditions</a></li>
+                <li><a href="<?php echo $this->url('pages',array('id'=>1))?>">Privacy Policy</a></li>
               </ul>
             </div>
           </div>
