@@ -9,7 +9,8 @@
 
 namespace Application;
 
-use Application\Model\Services;
+//use Application\Model\Services;
+use Zend\Mvc\Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use Zend\Session\Config\SessionConfig;
@@ -29,17 +30,26 @@ use Application\Model\Jobrole;
 use Application\Model\JobroleTable;
 use Application\Model\Pages;
 use Application\Model\PagesTable;
+use Application\Model\Services;
+use Application\Model\ServicesTable;
+use Application\Model\ServiceOption;
+use Application\Model\ServiceOptionTable;
 
 
 
 class Module 
 {
+    private $app;
+    private $serviceManager;
+
     public function onBootstrap(MvcEvent $e)
     {
        /* $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
      */
+        $this->app = $e->getApplication();
+        $this->serviceManager = $this->app->getServiceManager();
 
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
@@ -60,6 +70,8 @@ class Module
         }, 100);
         $eventManager->attach('dispatch', array($this, 'setLayoutVars'));
         $eventManager->attach('dispatch', array($this, 'sessionVars'));
+        $eventManager->attach('dispatch', array($this, 'getServices'));
+        $eventManager->attach('dispatch', array($this, 'getPages'));
 
 
         $this->initSession(array(
@@ -84,6 +96,26 @@ class Module
                 ),
             ),
         );
+    }
+
+    public function getPages(){
+
+        $sm = $this->serviceManager;
+        $pagesTable = $sm->get('\Application\Model\PagesTable');
+
+        $res = $pagesTable->getMenuLink();
+        return $res;
+    }
+
+    public function getServices(MvcEvent $e){
+
+        $sm = $this->serviceManager;
+        $serviceTable = $sm->get('\Application\Model\ServicesTable');
+
+        $res = $serviceTable->getServices("","none");
+        $controller = $e->getTarget();
+        $controller->layout()->setVariable('serviceMenu' , $res);
+        return;
     }
 
 
@@ -160,11 +192,36 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Pages());
                     return new TableGateway('pages', $dbAdapter, null, $resultSetPrototype);
                 },
+                '\Application\Model\ServicesTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ServicesTableGateway');
+                    $table = new ServicesTable($tableGateway);
+                    return $table;
+                },
+                'ServicesTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Services());
+                    return new TableGateway('services', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Application\Model\ServiceOptionTable' =>  function($sm) {
+                    $tableGateway = $sm->get('ServicesOptionTableGateway');
+                    $table = new ServiceOptionTable($tableGateway);
+                    return $table;
+                },
+                'ServiceOptionTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new ServiceOption());
+                    return new TableGateway('service_option', $dbAdapter, null, $resultSetPrototype);
+                },
 
             ),
 
         );
     }
+
+
+
 
     public function setLayoutVars($e){
         //$target->layout()->setVariable('name', $admin_session->name);

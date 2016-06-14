@@ -81,6 +81,21 @@
 
     <ul id="navigation">
       <li> <a href="<?php echo $this->basepath?>">Home</a></li>
+
+      <li class="first expanded current"><a href="<?php echo $this->url("service")?>">Services<span class="dropdown"></span></a>
+        <ul class="submenu" style="display: none;">
+          <?php
+            foreach($serviceMenu as $sMenu){
+
+              ?>
+              <li><a href="<?php echo $this->url("service",array("id" => $sMenu['serviceId']))?>"><?php echo $sMenu['serviceTitle']?> </a></li>
+
+          <?php
+            }
+          ?>
+
+        </ul>
+      </li>
      <!-- <li class="first expanded current"><a href="jobs.html">Jobs<span class="dropdown"></span></a>
         <ul class="submenu" style="display: none;">
           <li><a href="jobs.html">Job listing</a></li>

@@ -1,0 +1,76 @@
+<?php
+if(is_array($service)){
+    $service = (object)$service;
+}
+
+?>
+
+<div id="content" style="min-height: 304px;">
+    <div id="title">
+        <h1 class="inner title-2">Services
+            <ul class="breadcrumb-inner">
+                <li> <a href="<?php echo $this->url('index')?>">Home</a></li>
+                <li> <a href="<?php $this->url('service')?>">Service</a></li>
+
+                <?php
+                    if(isset($service->serviceId)){
+                        ?>
+                        <li> <a href="<?php echo  $this->url('service',array("id"=>$service->serviceId))?>"><?php echo  $service->serviceTitle?></a></li>
+                <?php
+                    }
+                ?>
+
+            </ul>
+        </h1>
+    </div>
+    <div class="inner">
+<?php
+//print_r($page);
+//var_dump($menu);
+
+
+?>
+        <!-- Content Inner -->
+        <div class="content-inner">
+
+            <!-- Content Center -->
+            <div class="content-center">
+                <div class="body">
+                    <div class="clear"></div>
+                    <div class="row">
+                   <?php
+                   foreach ($service as $s ){
+
+
+
+                        ?>
+                           <div class="col-md-4">
+
+                               <div>
+                                 <h3> <a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a> </h3>
+                               </div>
+
+                               <div>
+                                   <?php echo $s['optionTitle'] ?>  <?php echo $s['price'] ?>
+                               </div>
+
+                           </div>
+                    <?php
+                    }
+                   ?>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /Content Center -->
+
+
+
+            <div class="clear"></div>
+            <!-- Clear Line -->
+
+        </div>
+        <!-- /Content Inner -->
+
+    </div>
+</div>

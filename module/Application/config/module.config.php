@@ -96,6 +96,22 @@ return array(
             ),
 
 
+            'service' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/service[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Services',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+
+
             'index' => array(
                 'type' => 'segment',
                 'options' => array(
@@ -170,6 +186,7 @@ return array(
             'Application\Controller\Rservices' => Controller\RservicesController::class,
             'Application\Controller\Profile' => Controller\ProfileController::class,
             'Application\Controller\Pages' => Controller\PagesController::class,
+            'Application\Controller\Services' => Controller\ServicesController::class,
         ),
     ),
     'view_manager' => array(

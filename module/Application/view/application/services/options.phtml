@@ -1,0 +1,101 @@
+<?php
+/*if(is_array($service)){
+    $service = (object)$service;
+}*/
+//var_dump($service);
+$title = $service->serviceTitle;
+?>
+
+<div id="content" style="min-height: 304px;">
+    <div id="title">
+        <h1 class="inner title-2"><?php echo $service['serviceTitle'];?>
+            <ul class="breadcrumb-inner">
+                <li> <a href="<?$this->basepath()?>">Home</a></li>
+                <li> <a href="<?php $this->url('service')?>">Service</a></li>
+                <li> <a href="<?php echo  $this->url('service',array("id"=>$service['serviceId']))?>"><?php echo  $service['serviceTitle']?></a></li>
+            </ul>
+        </h1>
+    </div>
+    <div class="inner">
+<?php
+//print_r($page);
+//  var_dump($service);
+
+
+?>
+        <!-- Content Inner -->
+        <div class="content-inner">
+
+            <!-- Content Center -->
+            <div class="content-center">
+                <div class="body">
+                    <div class="clear"></div>
+                    <div class="heading-l">
+                        <h2> <?php echo $service['serviceTitle'];?> </h2>
+                    </div>
+
+                    <?php echo $service['content'];?>
+
+                </div>
+            </div>
+            <!-- /Content Center -->
+
+
+
+            <!--- For Price Form starts here -->
+
+
+            <div class="content-right">
+                <div id="about-us-navigation" class="box-1">
+                    <div class="">
+                        <ul>
+                           <li><?php echo $service['serviceTitle'];?> </li>
+                            <li> &nbsp;</li>
+                            <?php
+                                foreach($service as $s ){
+                                    echo $s['optionTitle'];
+                                }
+                            ?>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--- For Price Form ends here  here -->
+
+
+
+
+
+            <!-- Content Right -->
+            <div class="content-right">
+                <div id="about-us-navigation" class="box-1">
+                    <div class="">
+                        <ul>
+                        <?php
+                            foreach($all as $ser){
+                                //var_dump($ser);
+                                ?>
+                                <li><a href="<?php echo $this->url('service',array("id"=>$ser['serviceId']))?>"><?php echo $ser['serviceTitle']?></a></li>
+                            <?php
+                            }
+                        ?>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /Content Right -->
+
+            <div class="clear"></div>
+            <!-- Clear Line -->
+
+        </div>
+        <!-- /Content Inner -->
+
+    </div>
+</div>

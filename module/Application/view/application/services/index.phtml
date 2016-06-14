@@ -1,0 +1,121 @@
+<?php
+/*if(is_array($service)){
+    $service = (object)$service;
+}*/
+//var_dump($service->current());
+//$title = $service->serviceTitle;
+$serviceDet = $service->current();
+?>
+
+<div id="content" style="min-height: 304px;">
+    <div id="title">
+        <h1 class="inner title-2"><?php echo $serviceDet['serviceTitle'];?>
+            <ul class="breadcrumb-inner">
+                <li> <a href="<?$this->basepath()?>">Home</a></li>
+                <li> <a href="<?php $this->url('service')?>">Service</a></li>
+                <li> <a href="<?php echo  $this->url('service',array("id"=>$serviceDet['serviceId']))?>"><?php echo  $serviceDet['serviceTitle']?></a></li>
+            </ul>
+        </h1>
+    </div>
+    <div class="inner">
+<?php
+//print_r($page);
+//  var_dump($service);
+
+
+?>
+        <!-- Content Inner -->
+        <div class="content-inner">
+
+            <!-- Content Center -->
+            <div class="content-center">
+                <div class="body">
+                    <div class="clear"></div>
+                    <div class="heading-l">
+                        <h2> <?php echo $serviceDet['serviceTitle'];?> </h2>
+                    </div>
+
+                    <?php echo $serviceDet['content'];?>
+
+                </div>
+            </div>
+            <!-- /Content Center -->
+
+
+
+            <!--- For Price Form starts here -->
+
+
+            <div class="content-right">
+                <div id="about-us-navigation" class="box-1">
+                    <div class="">
+                        <form>
+                        <ul>
+                           <li style="font-weight: 900"><h4><?php echo $serviceDet['serviceTitle'];?></h4> </li>
+                            <!--<li> &nbsp;</li>-->
+                            <li>
+                                <label>
+                            <input style="display: block !important; float: left" type="radio" name="price" value="<?php echo $serviceDet['price']?>">
+                                    <span style="margin-left: 10px;">For <?php echo $serviceDet['optionTitle']?> Rs <?php echo $serviceDet['price']?> </span>
+                                </label>
+                            </li>
+                            <?php
+                            //echo $service->count();
+                              foreach($service as $ser ){
+                            //      var_dump($ser); exit;
+                              //    echo $ser['optionTitle'];
+                                  ?>
+                                  <li>
+                                      <label>
+                                          <input style="display: block !important; float: left" type="radio" name="price" value="<?php echo $ser['price']?>">
+                                          <span style="margin-left: 10px;">For <?php echo $ser['optionTitle']?> Rs <?php echo $ser['price']?></span>
+                                      </label>
+                                  </li>
+                                  <?php
+                              }
+                            ?>
+
+                        <li> <input type="button" value="Add to Cart" class="btn btn-primary"> </li>
+
+                        </ul>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--- For Price Form ends here  here -->
+
+
+<br> <br>
+
+
+            <!-- Content Right -->
+            <div class="content-right">
+                <div id="about-us-navigation" class="box-1">
+                    <div class="">
+                        <ul>
+                        <?php
+                            foreach($all as $ser){
+                                //var_dump($ser);
+                                ?>
+                                <li><a href="<?php echo $this->url('service',array("id"=>$ser['serviceId']))?>"><?php echo $ser['serviceTitle']?></a></li>
+                            <?php
+                            }
+                        ?>
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /Content Right -->
+
+            <div class="clear"></div>
+            <!-- Clear Line -->
+
+        </div>
+        <!-- /Content Inner -->
+
+    </div>
+</div>
