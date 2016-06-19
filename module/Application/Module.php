@@ -214,6 +214,17 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new ServiceOption());
                     return new TableGateway('service_option', $dbAdapter, null, $resultSetPrototype);
                 },
+                '\Application\Model\CartTable' =>  function($sm) {
+                    $tableGateway = $sm->get('CartTableGateway');
+                    $table = new ServiceOptionTable($tableGateway);
+                    return $table;
+                },
+                'CartTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Cart());
+                    return new TableGateway('resume_cart', $dbAdapter, null, $resultSetPrototype);
+                },
 
             ),
 

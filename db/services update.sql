@@ -120,3 +120,60 @@ ALTER TABLE `service_options`
 --
 ALTER TABLE `service_options`
   MODIFY `serviceOptionId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  
+  
+  
+  
+  
+  -- phpMyAdmin SQL Dump
+-- version 4.4.10
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost:3306
+-- Generation Time: Jun 16, 2016 at 10:23 AM
+-- Server version: 5.5.42
+-- PHP Version: 5.6.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Database: `clickjobsnew`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `resume_cart`
+--
+
+CREATE TABLE `resume_cart` (
+  `cartId` int(11) NOT NULL,
+  `userId` varchar(40) NOT NULL,
+  `serviceId` int(11) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '1',
+  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `resume_cart`
+--
+ALTER TABLE `resume_cart`
+  ADD PRIMARY KEY (`cartId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `resume_cart`
+--
+ALTER TABLE `resume_cart`
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT;
+  
+  
+  ALTER TABLE resume_cart MODIFY userId VARCHAR(50) NOT NULL DEFAULT 0;

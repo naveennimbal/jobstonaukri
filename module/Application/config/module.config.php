@@ -126,6 +126,20 @@ return array(
                     ),
                 ),
             ),
+            'cart' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/cart[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -187,6 +201,7 @@ return array(
             'Application\Controller\Profile' => Controller\ProfileController::class,
             'Application\Controller\Pages' => Controller\PagesController::class,
             'Application\Controller\Services' => Controller\ServicesController::class,
+            'Application\Controller\Cart' => Controller\CartController::class,
         ),
     ),
     'view_manager' => array(

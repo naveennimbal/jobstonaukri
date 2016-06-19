@@ -67,7 +67,7 @@ $serviceDet = $service->current();
                                   ?>
                                   <li>
                                       <label>
-                                          <input style="display: block !important; float: left" type="radio" name="price" value="<?php echo $ser['price']?>">
+                                          <input style="display: block !important; float: left" type="radio" name="price" data-optiondata="<?php ?>" value="<?php echo $ser['price']?>">
                                           <span style="margin-left: 10px;">For <?php echo $ser['optionTitle']?> Rs <?php echo $ser['price']?></span>
                                       </label>
                                   </li>
@@ -75,7 +75,7 @@ $serviceDet = $service->current();
                               }
                             ?>
 
-                        <li> <input type="button" value="Add to Cart" class="btn btn-primary"> </li>
+                        <li> <input type="button" value="Add to Cart" class="btn btn-primary" id="addToCart"> </li>
 
                         </ul>
                         </form>
