@@ -49,7 +49,7 @@ $serviceDet = $service->current();
             <div class="content-right">
                 <div id="about-us-navigation" class="box-1">
                     <div class="">
-                        <form id="resform">
+                        <form id="resform"  method="post" action="<?php echo $this->url('cart',array("action"=>"add"))?>">
                         <ul>
                            <li style="font-weight: 900"><h4><?php echo $serviceDet['serviceTitle'];?></h4> </li>
                             <!--<li> &nbsp;</li>-->
@@ -61,7 +61,7 @@ $serviceDet = $service->current();
                             </li>
                             <?php
                             //echo $service->count(); exit;
-                            if($service->count() > 1 ) {
+                            if($service->count() >= 1 ) {
                                 foreach ($service as $ser) {
                                     //      var_dump($ser); exit;
                                     //    echo $ser['optionTitle'];
@@ -69,7 +69,7 @@ $serviceDet = $service->current();
                                     <li>
                                         <label>
                                             <input style="display: block !important; float: left" type="radio"
-                                                   name="price" data-optiondata="<?php ?>"
+                                                   name="price" data-optiondata="<?php echo $ser['optionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
                                                    value="<?php echo $ser['price'] ?>">
                                             <span style="margin-left: 10px;">For <?php echo $ser['optionTitle'] ?>
                                                 Rs <?php echo $ser['price'] ?></span>
@@ -84,7 +84,7 @@ $serviceDet = $service->current();
                                 <li>
                                     <label>
                                         <input style="display: block !important; float: left" type="radio"
-                                               name="price" data-optiondata="<?php ?>"
+                                               name="price" data-optiondata="<?php echo $ser['optionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
                                                value="<?php echo $ser['price'] ?>">
                                             <span style="margin-left: 10px;">For <?php echo $ser['optionTitle'] ?>
                                                 Rs <?php echo $ser['price'] ?></span>
