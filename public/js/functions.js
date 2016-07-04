@@ -17,6 +17,8 @@ $(document).ready(function(){
     */
 
 
+
+
     $("#resform").submit(function(){
         console.log(this);
         alert("for submit");
