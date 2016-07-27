@@ -59,7 +59,7 @@ class UsersTable
             'status'=>$data->status,
             'dateAdded'=>$data->dateAdded,
         );
-        //var_dump($Sqldata); exit;
+        var_dump($Sqldata); exit;
         return $this->tableGateway->insert($Sqldata);
     }
 
