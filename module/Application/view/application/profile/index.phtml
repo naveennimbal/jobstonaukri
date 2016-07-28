@@ -3,8 +3,23 @@
     if(!is_object($user)){
         $user = (object)$user;
     }
-     var_dump($user);
+     //var_dump($user);
+
     ?>
+
+<script>
+  <?php
+      if($user->proStatus==0){
+        ?>
+  $(document).ready(function(){
+    $(".info").hide();
+  });
+  <?php
+      }
+  ?>
+</script>
+
+
 
 <div id="content">
   <div id="title">
@@ -21,7 +36,11 @@
     <div class="content-inner candidate-single"> 
       
       <!-- Content Left -->
-      <div class="content-left">
+
+
+
+
+      <div class="content-left info">
         <div class="block background job_block">
           <div id="map-container" class="candidate-pic"> <img src="images/candidate.png"  alt="Candidate picture"/> </div>
           <h2 class="title-3">Contact Details</h2>
@@ -81,7 +100,7 @@
       <!-- /Content Left --> 
       
       <!-- Content Center -->
-      <div class="content-center">
+      <div class="content-center info">
         <div class="heading-l">
           <h2> Profile Description </h2>
         </div>

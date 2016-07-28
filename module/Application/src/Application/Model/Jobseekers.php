@@ -73,7 +73,8 @@ namespace Application\Model;
     public $AutoApply;
     public $EmailActive;
     public $fb_id;
-          
+    public $proStatus;
+
      protected $inputFilter;
     
      /*
@@ -148,21 +149,17 @@ namespace Application\Model;
         $this->AutoApply = (isset($data['AutoApply'])) ? $data['AutoApply'] : "";
         $this->EmailActive = (isset($data['EmailActive'])) ? $data['EmailActive'] : "";
         $this->fb_id = (isset($data['fb_id'])) ? $data['fb_id'] : "";
+         $this->proStatus = (isset($data['proStatus'])) ? $data['proStatus'] : "0";
 
           
-     }
-
-     public function setInputFilter(InputFilterInterface $inputFilter)
-     {
-         throw new \Exception("Not used");
      }
 
      public function getInputFilter()
      {
          if (!$this->inputFilter) {
              $inputFilter = new InputFilter();
-             
-           
+
+
 
  $inputFilter->add(array(
                  'name'     => 'UserId',
@@ -172,12 +169,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Password',
                  //'required' => true,
@@ -186,12 +183,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'ProfileId',
                  //'required' => true,
@@ -200,12 +197,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Xml',
                  //'required' => true,
@@ -214,12 +211,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'DateAdded',
                  //'required' => true,
@@ -228,12 +225,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'DateModified',
                  //'required' => true,
@@ -242,12 +239,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Validated',
                  //'required' => true,
@@ -256,12 +253,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Name',
                  //'required' => true,
@@ -270,12 +267,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Email',
                  //'required' => true,
@@ -284,12 +281,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'BlogUrl',
                  //'required' => true,
@@ -298,12 +295,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Website',
                  //'required' => true,
@@ -312,12 +309,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Microblog',
                  //'required' => true,
@@ -326,12 +323,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Active',
                  //'required' => true,
@@ -340,12 +337,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'JobPrompt',
                  //'required' => true,
@@ -354,12 +351,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'SiteId',
                  //'required' => true,
@@ -368,12 +365,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'ReferredBy',
                  //'required' => true,
@@ -382,12 +379,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'LastActive',
                  //'required' => true,
@@ -396,12 +393,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'SmsAlert',
                  //'required' => true,
@@ -410,12 +407,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Email_Auth',
                  //'required' => true,
@@ -424,12 +421,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mobile_Auth',
                  //'required' => true,
@@ -438,12 +435,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_Phone_Auth',
                  //'required' => true,
@@ -452,12 +449,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'KioskID',
                  //'required' => true,
@@ -466,12 +463,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'BranchID',
                  //'required' => true,
@@ -480,12 +477,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mobile',
                  //'required' => true,
@@ -494,12 +491,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_Cnt',
                  //'required' => true,
@@ -508,12 +505,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mob_Cnt',
                  //'required' => true,
@@ -522,12 +519,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_Std',
                  //'required' => true,
@@ -536,12 +533,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_Phone',
                  //'required' => true,
@@ -550,12 +547,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Cnt_Code',
                  //'required' => true,
@@ -564,12 +561,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'St_Code',
                  //'required' => true,
@@ -578,12 +575,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'St_Other',
                  //'required' => true,
@@ -592,12 +589,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'City_Code',
                  //'required' => true,
@@ -606,12 +603,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'City_Other',
                  //'required' => true,
@@ -620,12 +617,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Dob',
                  //'required' => true,
@@ -634,12 +631,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Gender',
                  //'required' => true,
@@ -648,12 +645,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Photo_Path',
                  //'required' => true,
@@ -662,12 +659,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Current_Resume',
                  //'required' => true,
@@ -676,12 +673,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Block_Comp',
                  //'required' => true,
@@ -690,12 +687,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Name_Flag',
                  //'required' => true,
@@ -704,12 +701,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Email_Flag',
                  //'required' => true,
@@ -718,12 +715,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mailing_Address',
                  //'required' => true,
@@ -732,12 +729,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mailing_Flag',
                  //'required' => true,
@@ -746,12 +743,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Contact_Flag',
                  //'required' => true,
@@ -760,12 +757,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Shield_Type',
                  //'required' => true,
@@ -774,12 +771,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_P_Status',
                  //'required' => true,
@@ -788,12 +785,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_UP_Status',
                  //'required' => true,
@@ -802,12 +799,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_UM_Status',
                  //'required' => true,
@@ -816,12 +813,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_Mod_Status',
                  //'required' => true,
@@ -830,12 +827,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Res_UMod_Status',
                  //'required' => true,
@@ -844,12 +841,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Sms_Code',
                  //'required' => true,
@@ -858,12 +855,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Email_Code',
                  //'required' => true,
@@ -872,12 +869,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Interested_In',
                  //'required' => true,
@@ -886,12 +883,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'PhotoStatus',
                  //'required' => true,
@@ -900,12 +897,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Profile_Settings',
                  //'required' => true,
@@ -914,12 +911,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Profile_View',
                  //'required' => true,
@@ -928,12 +925,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Delete_Status',
                  //'required' => true,
@@ -942,12 +939,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Delete_Res',
                  //'required' => true,
@@ -956,12 +953,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Delete_Oth_Res',
                  //'required' => true,
@@ -970,12 +967,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Deleted_Date',
                  //'required' => true,
@@ -984,12 +981,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Email_Verify_Date',
                  //'required' => true,
@@ -998,12 +995,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'Mobile_Verify_Date',
                  //'required' => true,
@@ -1012,12 +1009,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'AutoApply',
                  //'required' => true,
@@ -1026,12 +1023,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'EmailActive',
                  //'required' => true,
@@ -1040,12 +1037,12 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
- 
+
+
+
  $inputFilter->add(array(
                  'name'     => 'fb_id',
                  //'required' => true,
@@ -1054,18 +1051,35 @@ namespace Application\Model;
                      array('name' => 'StringTrim'),
                  ),
                  'validators' => array(
-                     
+
                  ),
              ));
-             
-             
-             
+
+  $inputFilter->add(array(
+                 'name'     => 'proStatus',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
+                 ),
+             ));
+
+
+
 
 
              $this->inputFilter = $inputFilter;
          }
         return $this->inputFilter;
         // $this->inputFilter ;
-         
+
+     }
+
+     public function setInputFilter(InputFilterInterface $inputFilter)
+     {
+         throw new \Exception("Not used");
      }
  }

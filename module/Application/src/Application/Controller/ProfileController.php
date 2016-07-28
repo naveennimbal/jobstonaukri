@@ -57,7 +57,7 @@ class ProfileController extends AbstractActionController
         $userDetail = $user_session->userDetails;
         if(empty($userDetail)){ return $this->redirect()->toRoute("index",array("action"=>"index","id"=>"0")); }
         $userDetails = $this->getJobseekersTable()->getUserDetails($userDetail->UserId);
-       var_dump($userDetails); exit;
+       //var_dump($userDetails); exit;
         return new ViewModel(array("user"=>$userDetails));
     }
     
