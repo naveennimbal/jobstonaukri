@@ -29,6 +29,7 @@ class RegisterController extends AbstractActionController
 
     protected $usersTable;
     protected $jobseekersTable;
+    protected $jobseekersdetailsTable;
 
 
     public function getUsersTable() {
@@ -46,6 +47,14 @@ class RegisterController extends AbstractActionController
         }
         return $this->jobseekersTable;
     }
+
+    public function getJobseekersdetailsTable() {
+        if (!$this->jobseekersdetailsTable) {
+            $sm = $this->getServiceLocator();
+            $this->jobseekersdetailsTable = $sm->get('\Application\Model\JobseekersdetailsTable');
+        }
+        return $this->jobseekersdetailsTable;
+    }
     
     
     
@@ -62,6 +71,9 @@ class RegisterController extends AbstractActionController
         if ($request->isPost()) {
             $user = new \Application\Model\Jobseekers();
             $userData = array();
+            $detData = array();
+            $jobseekersDetails = new \Application\Model\Jobseekersdetails();
+
            
             $userData['Email']=$request->getPost('email');
             $userData['Password']=$request->getPost('passwd');
@@ -69,13 +81,19 @@ class RegisterController extends AbstractActionController
             $userData['UserId']=$profileId;
             $userData['ProfileId']=$profileId;
             $userData['DateAdded']=  date('Y-m-d H:i:s');
+            $detData['UserId']=$profileId;
+            $detData['DateAdded']=  date('Y-m-d H:i:s');
             $emailReturn =  $this->checkEmail($request->getPost('email'));
             //var_dump($userData); exit;
                 if($emailReturn=="true"){
                     
                     $user->exchangeArray($userData);
+                    $jobseekersDetails->exchangeArray($detData);
+                    //var_dump($jobseekersDetails); exit;
                     //$this->getUsersTable()->save($user);
                     if ($this->getJobseekersTable()->save($user)) {
+
+                        $this->getJobseekersdetailsTable()->save($jobseekersDetails);
                         $return['status']= "success";
                         $return['message']= " Sucessfully Registered";
                     } else {

@@ -420,8 +420,10 @@ class JobseekersTable
         
         //$resultSet = $this->tableGateway->selectWith($select);
         $sqlString = "SELECT jobseekers.* , cj_ch_jobseekers_res_det.*,country.Cnt_Desc,st.St_Desc,ct.City_Desc  from jobseekers join cj_ch_jobseekers_res_det on jobseekers.UserId = cj_ch_jobseekers_res_det.UserId join cj_mast_country country on country.Cnt_Code = jobseekers.Cnt_Code  join cj_mast_state st on st.St_Code=jobseekers.St_Code join cj_mast_city ct on ct.City_Code=jobseekers.City_Code where jobseekers.Userid='".$userId."' group by (jobseekers.UserId) ";
+        echo $sqlString; exit;
+
         $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
-        var_dump($resultSet); exit;
+        //var_dump($resultSet); exit;
         $result['user_details'] =   $resultSet->current();
         
         $edu_sql = "Select * from cj_mast_education where Edu_Code = '".$result['Edu_Code1']."'";

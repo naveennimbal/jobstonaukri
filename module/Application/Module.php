@@ -10,6 +10,7 @@
 namespace Application;
 
 //use Application\Model\Services;
+
 use Zend\Mvc\Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -34,6 +35,8 @@ use Application\Model\Services;
 use Application\Model\ServicesTable;
 use Application\Model\ServiceOption;
 use Application\Model\ServiceOptionTable;
+use Application\Model\Jobseekersdetails;
+use Application\Model\JobseekersdetailsTable;
 
 
 
@@ -224,6 +227,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Cart());
                     return new TableGateway('resume_cart', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Application\Model\JobseekersdetailsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JobseekersdetailsTableGateway');
+                    $table = new JobseekersdetailsTable($tableGateway);
+                    return $table;
+                },
+                'JobseekersdetailsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jobseekersdetails());
+                    return new TableGateway('cj_ch_jobseekers_res_det', $dbAdapter, null, $resultSetPrototype);
                 },
 
             ),
