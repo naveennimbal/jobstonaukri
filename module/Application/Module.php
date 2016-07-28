@@ -260,6 +260,13 @@ class Module
         $target = $e->getTarget();
         //var_dump($target); exit;
         $target->layout()->setVariable('routeName', ucfirst($action));
+
+        // for making the  user name avaialble after login
+        $userSession = new Container('user');
+        if(isset($userSession->userDetails)){
+            $target->layout()->setVariable('userDetails', $userSession->userDetails);
+        }
+
         return;
 
     }
