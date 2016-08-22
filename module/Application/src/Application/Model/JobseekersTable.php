@@ -7,6 +7,7 @@ use Zend\Db\Sql\Select;
 use Zend\Db\Sql\Sql;
 use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
+use Zend\Db\Metadata\Metadata;
 
 
 class JobseekersTable
@@ -481,7 +482,16 @@ class JobseekersTable
     }
 
 
-    
+    public function getColumns(){
+        $meta = new Metadata($this->tableGateway->getAdapter());
+        $table  =  $meta->getTable("jobseekers");
+        $columns = array();
+       foreach($table->getColumns() as $col ){
+           $columns[] = $col->getName();
+       }
+       //var_dump($columns); exit;
+        return $columns;
+    }
     
     
 
