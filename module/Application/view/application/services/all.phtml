@@ -39,8 +39,9 @@ if(is_array($service)){
                     <div class="clear"></div>
                     <div class="row">
                    <?php
-                   foreach ($service as $s ){
 
+                   foreach ($service as $s ){
+                   // var_dump($s); exit;
 
 
                         ?>
@@ -49,10 +50,23 @@ if(is_array($service)){
                                <div>
                                  <h3> <a href="<?php echo $this->url("service",array("id"=>$s['serviceId']))?>" ><?php echo $s['serviceTitle'] ?></a> </h3>
                                </div>
-
                                <div>
-                                   <?php echo $s['optionTitle'] ?>  <?php echo $s['price'] ?>
+
+                                   <?php
+                                   $con = strip_tags($s['content']);
+
+                                   echo "<p>";
+
+                                   echo substr($con,0,80);
+
+                                   echo "</p>";
+
+                                   ?>
                                </div>
+
+                               <!--<div>
+                                   <?php echo $s['optionTitle'] ?>  <?php echo $s['price'] ?>
+                               </div> -->
 
                            </div>
                     <?php
