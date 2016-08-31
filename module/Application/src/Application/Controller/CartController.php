@@ -56,6 +56,11 @@ class CartController extends AbstractActionController{
     }
 
 
+    public function indexAction()
+    {
+        return new ViewModel();
+    }
+
 
     public function loginAction(){
         $request = $this->getRequest();

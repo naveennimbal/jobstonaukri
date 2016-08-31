@@ -93,6 +93,19 @@ class Cart implements InputFilterAwareInterface
                 ),
             ));
 
+
+            $inputFilter->add(array(
+                'name'     => 'serviceOptionId',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
             $inputFilter->add(array(
                 'name'     => 'dateAdded',
                 //'required' => true,

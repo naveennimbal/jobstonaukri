@@ -149,11 +149,35 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `resume_cart` (
   `cartId` int(11) NOT NULL,
-  `userId` varchar(40) NOT NULL,
+  `userId` varchar(50) NOT NULL DEFAULT '0',
   `serviceId` int(11) DEFAULT NULL,
+  `serviceOptionId` int(11) DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '1',
   `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `services` (
+  `serviceId` int(11) NOT NULL,
+  `serviceTitle` varchar(150) NOT NULL,
+  `content` text NOT NULL,
+  `status` int(1) NOT NULL DEFAULT '1',
+  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+
+
+CREATE TABLE `service_options` (
+  `serviceOptionId` int(11) NOT NULL,
+  `serviceId` int(11) NOT NULL,
+  `optionTitle` varchar(50) NOT NULL,
+  `price` int(11) NOT NULL,
+  `additional` tinyint(4) DEFAULT '0',
+  `status` int(11) NOT NULL DEFAULT '1',
+  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+
 
 --
 -- Indexes for dumped tables

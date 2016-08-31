@@ -53,6 +53,7 @@ class CartTable
             'cartId'=>$data->cartId,
             'userId'=>$data->userId,
             'serviceId'=>$data->serviceId,
+            'serviceOptionId'=>$data->serviceOptionId,
 
         );
         return $this->tableGateway->insert($Sqldata);
