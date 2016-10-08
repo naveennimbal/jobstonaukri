@@ -4,6 +4,7 @@ vendor
 .idea
 *.phar
 
+<<<<<<< HEAD
 module/.DS_Store
 
 module/Application/.DS_Store
@@ -37,3 +38,10 @@ composer.lock
 composer.lock
 
 composer.lock
+=======
+public/.DS_Store
+
+public/img/.DS_Store
+
+.DS_Store
+>>>>>>> origin/master
