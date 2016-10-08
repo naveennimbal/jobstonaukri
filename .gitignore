@@ -31,3 +31,9 @@ db/.DS_Store
 *.lock
 
 composer.lock
+
+.DS_Store
+
+composer.lock
+
+composer.lock
