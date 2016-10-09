@@ -56,8 +56,10 @@ class CartController extends AbstractActionController{
     }
 
 
-    public function indexAction()
-    {
+    public function indexAction(){
+
+        
+
         return new ViewModel();
     }
 

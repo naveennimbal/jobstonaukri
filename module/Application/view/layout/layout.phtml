@@ -52,14 +52,20 @@
 <!-- Bar -->
 <div id="bar">
   <div class="inner"> 
-    
+
+    <?php
+    //var_dump($userDetails); exit;
+    ?>
+
     <!-- User Menu -->
     <ul id="user-menu">
-        <?php if(!isset($user->userId)){ ?>
+        <?php if(!isset($userDetails->UserId)){ ?>
         <li id="login" class="first"><a href="#" id="loginLink">Login</a></li>
         <li id="register"><a href="#" id="registerLink">Register</a></li>
         <?php } else { ?>
-        <li  class="first"><a href="<?php echo $this->url("profile")?>" id="loginLink">Hello <?php echo ($user->firstName!="")? ucfirst($user->firstName):$user->email  ?></a></li>
+        <!--<li  class="first"><a href="<?php echo $this->url("profile")?>" id="loginLink">Hello <?php echo ($userDetails->UserId!="")? ucfirst($userDetails->firstName):$userDetails->Email  ?></a></li>-->
+        <li  class="first"><a href="<?php echo $this->url("profile")?>" id="loginLink">Hello <?php echo $userDetails->Email  ?></a></li>
+        <li ><a href="<?php echo $this->url("cart",array("action"=>"index"))?>" id="cartLink">My Cart</a></li>
         <li ><a href="<?php echo $this->url("register",array("action"=>"logout"))?>" id="registerLink">Logout</a></li>
         <?php } ?>
         
