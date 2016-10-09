@@ -124,6 +124,20 @@ return array(
                     ),
                 ),
             ),
+            'payment' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/payment[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Payment',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
 
 
             'index' => array(
@@ -203,6 +217,7 @@ return array(
             'Application\Controller\Pages' => Controller\PagesController::class,
             'Application\Controller\Services' => Controller\ServicesController::class,
             'Application\Controller\Cart' => Controller\CartController::class,
+            'Application\Controller\Payment' => Controller\PaymentController::class,
         ),
     ),
     'view_manager' => array(

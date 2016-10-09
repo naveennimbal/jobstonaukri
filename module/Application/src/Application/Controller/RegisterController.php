@@ -77,6 +77,7 @@ class RegisterController extends AbstractActionController
            
             $userData['Email']=$request->getPost('email');
             $userData['Password']=$request->getPost('passwd');
+            $userData['Mobile']=$request->getPost('phone');
             $profileId = $this->makeProfileId($userData['Email']);
             $userData['UserId']=$profileId;
             $userData['ProfileId']=$profileId;
@@ -84,22 +85,33 @@ class RegisterController extends AbstractActionController
             $detData['UserId']=$profileId;
             $detData['DateAdded']=  date('Y-m-d H:i:s');
             $emailReturn =  $this->checkEmail($request->getPost('email'));
+            $mobileReturn = $this->checkMobile($request->getPost("phone"));
             //var_dump($userData); exit;
                 if($emailReturn=="true"){
-                    
-                    $user->exchangeArray($userData);
-                    $jobseekersDetails->exchangeArray($detData);
-                    //var_dump($jobseekersDetails); exit;
-                    //$this->getUsersTable()->save($user);
-                    if ($this->getJobseekersTable()->save($user)) {
+                    if($mobileReturn=="true"){
 
-                        $this->getJobseekersdetailsTable()->save($jobseekersDetails);
-                        $return['status']= "success";
-                        $return['message']= " Sucessfully Registered";
+                        $user->exchangeArray($userData);
+                        $jobseekersDetails->exchangeArray($detData);
+                        //var_dump($jobseekersDetails); exit;
+                        //$this->getUsersTable()->save($user);
+                        if ($this->getJobseekersTable()->save($user)) {
+
+                            $this->getJobseekersdetailsTable()->save($jobseekersDetails);
+                            $return['status']= "success";
+                            $return['message']= " Sucessfully Registered";
+                        } else {
+                            $return['status']= "fail";
+                            $return['message']= "Database Error";
+                        }
+
                     } else {
-                        $return['status']= "fail";
-                        $return['message']= "Database Error";
+                        $return['status']= "mobile";
+                        $return['message']= "Mobile Already registered";
+
                     }
+
+                    
+
                     
                 } else {
                     $return['status']= "email";
@@ -183,6 +195,16 @@ class RegisterController extends AbstractActionController
         
     }
 
+    private function checkMobile($mobile){
+
+        // echo $email; exit;
+        $user = new \Application\Model\Jobseekers();
+        $ret =  $this->getJobseekersTable()->checkMobile($mobile);
+        //var_dump($ret); exit;
+        return $ret;
+
+    }
+
 
     
     public function checkemailAction(){
@@ -196,6 +218,8 @@ class RegisterController extends AbstractActionController
 
         return new JsonModel($ret);
     }
+
+
 
     
     public function loginAction(){

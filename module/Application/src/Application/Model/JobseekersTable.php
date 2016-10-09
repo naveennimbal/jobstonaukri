@@ -338,6 +338,29 @@ class JobseekersTable
     
     }
 
+
+    public function checkMobile($phone) {
+
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where(array("Mobile"=>$phone));
+        //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
+        //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
+
+        //echo $select; exit;
+        $resultSet = $this->tableGateway->selectWith($select);
+
+        $res = "";
+        if($resultSet->count()==0){
+            $res =  "true";
+        } else {
+            $res = "false";
+        }
+        return $res;
+
+    }
+
     public function login($email,$password){
        // echo $email."-----".$password;
         $sql = new Sql($this->tableGateway->adapter);

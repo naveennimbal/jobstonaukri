@@ -853,6 +853,10 @@ $(document).ready(function(){
                                $("#statusRegMsg").html("<span>  </span>")
                                $("#statusRegMsg").hide('slow')
                                $('#regemail').validationEngine('showPrompt', 'Email Already exist', 'error', true);  
+                            }else if(data.status=="mobile"){
+                                $("#statusRegMsg").html("<span>  </span>")
+                                $("#statusRegMsg").hide('slow')
+                                $('#regemail').validationEngine('showPrompt', 'Mobile Already exist', 'error', true);
                             } else{
                                 
                                 $("#statusRegMsg").css('color',"#ff1a1a");

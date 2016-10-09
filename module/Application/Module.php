@@ -239,6 +239,19 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Jobseekersdetails());
                     return new TableGateway('cj_ch_jobseekers_res_det', $dbAdapter, null, $resultSetPrototype);
                 },
+                '\Application\Model\PaymentTable' =>  function($sm) {
+                    $tableGateway = $sm->get('PaymentTableGateway');
+                    $table = new PaymentTable($tableGateway);
+                    return $table;
+                },
+                'PaymentTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Payment());
+                    return new TableGateway('payment', $dbAdapter, null, $resultSetPrototype);
+                },
+
+
 
             ),
 
