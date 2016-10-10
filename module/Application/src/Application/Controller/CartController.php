@@ -44,10 +44,14 @@ class CartController extends AbstractActionController{
     public function addAction(){
 
         $this->getRequest()->getPost();
-        var_dump($this->getRequest()->getPost()); exit;
+        //var_dump($this->getRequest()->getPost()); exit;
         $return = array();
         if($this->getRequest()->isPost()){
             $return[] = "this is post";
+            $sessionManager = $this->getServiceLocator()->get('Zend\Session\SessionManager');
+            $id = $sessionManager->getId();
+
+            echo $id; exit;
         } else {
             $return[] = "this is not post";
         }

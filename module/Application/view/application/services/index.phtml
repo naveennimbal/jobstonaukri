@@ -49,12 +49,12 @@ $serviceDet = $service->current();
             <div class="content-right">
                 <div id="about-us-navigation" class="box-1">
                     <div class="">
-                        <form id="resform"  method="post" action="<?php echo $this->url('cart',array("action"=>"add"))?>">
+                        <form id="resform"  method="post" action="<?php echo $this->url('cart',array("action"=>"add"))?>" onsubmit="return false">
                         <ul>
                            <li style="font-weight: 900"><h4><?php echo $serviceDet['serviceTitle'];?></h4> </li>
                             <!--<li> &nbsp;</li>-->
                             <li>
-                                <label>
+                                <label style="margin: auto;">
                             <input style="display: block !important; float: left" type="radio" name="price" value="<?php echo $serviceDet['price']?>">
                                     <span style="margin-left: 10px;">For <?php echo $serviceDet['optionTitle']?> Rs <?php echo $serviceDet['price']?> </span>
                                 </label>
@@ -68,11 +68,11 @@ $serviceDet = $service->current();
                                     //    echo $ser['optionTitle'];
                                     ?>
                                     <li>
-                                        <label>
+                                        <label style="margin: auto;">
                                             <input style="display: block !important; float: left" type="radio"
                                                    name="price" data-optiondata="<?php echo $ser['optionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
                                                    value="<?php echo $ser['price'] ?>">
-                                            <span style="margin-left: 10px;">For <?php echo $ser['optionTitle'] ?>
+                                            <span style="margin: 10px;">For <?php echo $ser['optionTitle'] ?>
                                                 Rs <?php echo $ser['price'] ?></span>
                                         </label>
                                     </li>
@@ -83,7 +83,7 @@ $serviceDet = $service->current();
                                 $ser = $serviceDet;
                                 ?>
                                 <li>
-                                    <label>
+                                    <label style="margin: auto;">
                                         <input style="display: block !important; float: left" type="radio"
                                                name="price" data-optiondata="<?php echo $ser['optionId'] ?>-#-<?php echo $ser['optionTitle'] ?>"
                                                value="<?php echo $ser['price'] ?>">
@@ -97,7 +97,7 @@ $serviceDet = $service->current();
                             }
                             ?>
 
-                        <li> <button type="submit" value="Add to Cart" class="btn btn-primary" id="addToCart"> Add to Cart </button> </li>
+                        <li> <button style="margin: 10px" type="submit" value="Add to Cart" class="btn btn-primary" id="addToCart"> Add to Cart </button> </li>
 
                         </ul>
                         </form>
@@ -141,3 +141,10 @@ $serviceDet = $service->current();
 
     </div>
 </div>
+<style>
+    ul label{
+        vertical-align: middle;
+        margin: auto;
+    }
+
+</style>
