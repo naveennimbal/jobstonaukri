@@ -40,43 +40,8 @@
                     <br><br>
 
 
-                    <form action="<?php if ($gateway=="paytm"){ echo PAYTM_TXN_URL;} else { echo "";}?>" id="paymentForm"  method="post" >
-                        <?php
-                            if($gateway=="razorpay") {
-                                ?>
 
-                                <input type="hidden" id="custname" name="custname" value="<?php echo $params['name'] ?>">
-                                <input type="hidden" id="custemail" name="custemail"
-                                       value="<?php echo $params['email'] ?>">
-                                <input type="hidden" id="amount" name="amount" value="<?php echo $params['amount'] ?>">
-                                <input type="hidden" id="mobile" name="mobile" value="<?php echo $params['mobile'] ?>">
-
-                                <?php
-                            }
-                        ?>
-                        <?php
-                            if($gateway=="paytm") {
-                                ?>
-
-
-                                <?php
-                                foreach($params as $param=>$val){
-                                    //var_dump($param); exit;
-                                    ?>
-                                    <input type="hidden" name="<?php echo $param ?>" value="<?php echo $val ?>">
-
-                                    <?php
-                                }
-
-                            }
-                        ?>
-
-                        <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> PLEASE WAIT WHILE WE PROCESS YOUR PAYMENT ...... </H1>
-
-                        <input type="button" id="makePayment" style="display: block" value="make payment">
-
-                    </form>
-
+                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> Thanks for your payment ...... </H1>
 
                 </div>
                 <br><br>
@@ -131,17 +96,14 @@
         //  $("#paymentForm").submit(function(){
 
         var amount = $("#amount").val() * 100;
-        var mobile = $("#mobile").val();
         var options = {
             "key": "rzp_live_PrW4PBBZe317iE",
             "amount": amount,
-            "contact": mobile,
             "name": "JobstoNaukri",
             "description": $("#description").val(),
             //"image": "",
             "handler": function (response){
                 alert("Your Payment is sucessful");
-                console.log(response);
             },
             "prefill": {
                 "name": $("#custname").val(),
@@ -176,7 +138,7 @@ if($gateway=="paytm"){
 ?>
 <script>
 
- //$("#paymentForm").submit();
+ $("#paymentForm").submit();
 
 </script>
 <?php

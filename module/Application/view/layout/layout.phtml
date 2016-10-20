@@ -88,9 +88,9 @@
     <!-- /Logo -->
 
     <ul id="navigation">
-      <li> <a href="<?php echo $this->basepath?>">Home</a></li>
+      <li> <a href="<?php echo BASEURL?>">Home</a></li>
 
-      <li class="first expanded current"><a href="<?php echo $this->url("service")?>">Services<span class="dropdown"></span></a>
+      <li class="first expanded"><a href="<?php echo $this->url("service")?>">Services<span class="dropdown"></span></a>
         <ul class="submenu" style="display: none;">
           <?php
             foreach($serviceMenu as $sMenu){
