@@ -61,6 +61,7 @@
         'Application' => 'layout/layout',
         'Admin' => 'layout/layout-admin',
         'Fui' => 'layout/fui',
+        'Sales' => 'layout/sales',
      ),
      
  );
