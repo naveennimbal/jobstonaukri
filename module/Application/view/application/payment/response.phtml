@@ -29,7 +29,7 @@
 
                 <div class="clear"></div>
                 <div class="heading-l">
-                    <h2> Make Payments </h2>
+                   
                 </div>
 
 
@@ -39,9 +39,17 @@
                 <div class="box-1 " id="">
                     <br><br>
 
+                <?php
+                   //; var_dump($res);
+                    $msg = "";
+                    if($res["STATUS"]=="TXN_SUCCESS"){
+                    $msg == "Thanks for your payment ";
+                    } else {
+                        $msg = $res["RESPMSG"];
+                    }
+                ?>
 
-
-                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> Thanks for your payment ...... </H1>
+                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> <?php echo $msg ?> </H1>
 
                 </div>
                 <br><br>

@@ -69,14 +69,14 @@ class PaymentController extends AbstractActionController{
 
         $paramList["MID"] = PAYTM_MERCHANT_MID;
         $paramList["ORDER_ID"] = uniqid("J2N");
-        $paramList["CUST_ID"] = "Cust009";
+        $paramList["CUST_ID"] = uniqid("Cust_");
         $paramList["INDUSTRY_TYPE_ID"] = "Retail120";
         $paramList["CHANNEL_ID"] = "WEB";
         $paramList["TXN_AMOUNT"] = $amount;
         $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
         $paramList["MOBILE_NO"] = $mobile;
         $paramList["EMAIL"] = $email;
-        $paramList["CALLBACK_URL"]= "http://www.jobstonaukri.com/payment/response";
+        $paramList["CALLBACK_URL"]= "http://www.jobs.loc/payment/response";
 
         $checkSum = $this->getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 
@@ -99,7 +99,14 @@ class PaymentController extends AbstractActionController{
         $gateway = $request->getPost("gateway");
 
         if($gateway=="paytm"){
-           $params =  $this->paytm($mobile,$email,$amount);
+
+            if ($mobile!="" && !empty($mobile) && $email!="" && !empty($email) && $amount!="" && !empty($amount)  ){
+                $params =  $this->paytm($mobile,$email,$amount);
+            } else {
+                return $this->redirect()->toRoute('payment', array(
+                    'error' => "1"
+                ));
+            }
            //$params["name"] = $name;
 
         } else if ($gateway=="razorpay"){
@@ -115,10 +122,11 @@ class PaymentController extends AbstractActionController{
         return new ViewModel(array("params"=>$params,"gateway"=>$gateway));
     }
 
-    public function paytmresAction()
+    public function responseAction()
     {
-        var_dump($_POST); exit;
-        return new ViewModel();
+       // var_dump($_POST); exit;
+        //echo "akgkasj";
+        return new ViewModel(array("res"=>$_POST));
     }
 
 
