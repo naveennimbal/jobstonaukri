@@ -58,10 +58,10 @@
 
      
      'module_layouts' => array(
-        'Application' => 'layout/layout',
-        'Admin' => 'layout/layout-admin',
+        'Application' => 'layout/layout.phtml',
+        'Admin' => 'layout/layout-admin.phtml',
         'Fui' => 'layout/fui',
-        'Sales' => 'layout/sales',
+        'Sales' => 'layout/sales.phtml',
      ),
      
  );
