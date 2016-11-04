@@ -61,7 +61,13 @@ class ProfileController extends AbstractActionController
         //echo "<pre>";
         //var_dump($cols); exit;
       // print_r($userDetails); exit;
-        return new ViewModel(array("user"=>$userDetails));
+
+        $view = new ViewModel();
+        //$view->la
+        $view->setTemplate('application/profile/down.phtml');  // module/Test/view/test/test/
+
+        return $view;
+        //return new ViewModel(array("user"=>$userDetails));
     }
     
     

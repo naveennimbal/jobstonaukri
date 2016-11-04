@@ -139,6 +139,21 @@ return array(
                 ),
             ),
 
+            'backoffice' => array(
+                'type' => 'segment',
+                'options' => array(
+                    'route' => '/backoffice[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Backoffice',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+
 
             'index' => array(
                 'type' => 'segment',
@@ -218,6 +233,7 @@ return array(
             'Application\Controller\Services' => Controller\ServicesController::class,
             'Application\Controller\Cart' => Controller\CartController::class,
             'Application\Controller\Payment' => Controller\PaymentController::class,
+            'Application\Controller\Backoffice' => Controller\BackofficeController::class,
         ),
     ),
     'view_manager' => array(

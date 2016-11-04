@@ -1,0 +1,83 @@
+<?php 
+   
+    if(!is_object($user)){
+        $user = (object)$user;
+    }
+     //var_dump($user);
+
+    ?>
+
+<script>
+  <?php
+      if($user->proStatus==0){
+        ?>
+  $(document).ready(function(){
+   // $(".info").hide();
+  });
+  <?php
+      }
+  ?>
+</script>
+
+
+
+<div id="content">
+  <div id="title">
+    <h1 class="inner job_page title-2"><?php echo ($user->Name == "")? ucwords($user->Name):"No Name"?> <span id="jobs-counter"> - <?php echo ($user->Res_Headline!="")?$user->Res_Headline:""?> </span>
+      <ul class="breadcrumb-inner">
+        <li> <a href="index.html">Home</a></li>
+        <li><a href="candidate.html">Candidate</a></li>
+      </ul>
+    </h1>
+  </div>
+  <div class="inner"> 
+    
+    <!-- Content Inner -->
+    <div class="content-inner candidate-single"> 
+      
+      <!-- Content Left -->
+      
+
+
+
+
+      
+      <!-- Content Center -->
+      <div class="content-center info">
+
+        <div class=" content-center border box-1 single-candidate">
+          <div id="job-content-field">
+            <div class="field-container single no_border">
+
+              <h1> Sorry for inconvenience  <br>We  currrently under maintenance  <br> We will be back soon <br> Thanks for being with us </h1>
+
+              <div class="body-field">
+                <div class="teaser">
+                  <p> <?php echo ($user->Res_Headline != "")? ucwords($user->Res_Headline):""?></p>
+                </div>
+               <!-- <div class="full-body" style="display: block">
+                  <p>Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </div> -->
+              </div>
+              <div class="block-fields">
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="clear"></div>
+        <!-- Clear Line --> 
+        
+      </div>
+      <!-- /Content Center -->
+      <div class="clear"></div>
+      <!-- Clear Line --> 
+      
+    </div>
+    <!-- /Content Inner --> 
+    
+  </div>
+</div>
