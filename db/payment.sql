@@ -13,3 +13,26 @@ CREATE TABLE `payment` (
   `agentName` varchar(30) NOT NULL,
   `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE `salesUser` (
+  salesUserId int AUTO_INCREMENT PRIMARY KEY ,
+  username VARCHAR(25) NOT NULL ,
+  password VARCHAR(30) NOT NULL ,
+  parentId INT DEFAULT "1" NOT NULL ,
+  roleId INT DEFAULT "1" NOT NULL ,
+  agencyId INT DEFAULT "1" NOT NULL ,
+  mobile VARCHAR(15) NOT NULL ,
+  email VARCHAR(60) NOT NULL ,
+  status TINYINT DEFAULT 1 ,
+  dateAdded DATE DEFAULT current_date ON UPDATE CURRENT_TIMESTAMP
+
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE payment add column salesUserId int  , ADD COLUMN verified TINYINT DEFAULT 0 AFTER tlName;
+
+CREATE TABLE role (
+  roleId int AUTO_INCREMENT PRIMARY KEY ,
+  roleName VARCHAR(10) NOT NULL ,
+  status TINYINT DEFAULT 1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
