@@ -20,6 +20,7 @@
 
 ?>
 
+
         <div class="content-inner">
 
             <!-- Content Center -->
@@ -33,12 +34,36 @@
 
                 <div class="box-1" >
 
-                    <table class="table table-condensed cartTable">
-                    <tr class="cartTableRow"><td class="cartTableCell"> sdkfsd sd fs dfkjhsdkjfh sdkhfdshfks fs</td> <td class="cartTableCell"> 1000 </td></td></tr>
-                    <tr class="cartTableRow"><td class="cartTableCell"> sdkfsd sd fs dfkjhsdkjfh sdkhfdshfks fs</td> <td class="cartTableCell"> 1000 </td></td></tr>
-                    <tr class="cartTableRow"><td class="cartTableCell"> sdkfsd sd fs dfkjhsdkjfh sdkhfdshfks fs</td> <td class="cartTableCell"> 1000 </td></td></tr>
-                    <tr class="cartTableRow"><td class="cartTableCell"> sdkfsd sd fs dfkjhsdkjfh sdkhfdshfks fs</td> <td class="cartTableCell"> 1000 </td></td></tr>
-                    <tr class="cartTableRow"><td class="cartTableCell"> sdkfsd sd fs dfkjhsdkjfh sdkhfdshfks fs</td> <td class="cartTableCell"> 1000 </td></td></tr>
+                    <table class="table table-condensed cartTable" id="cartTable">
+                        <tr class="cartTableRow"><td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF">  <span style="margin-left: 1em;"> Service Details  </span></td> <td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF"> Price  </td></td><td style="background-color: #4D4D4D; font: 900; color: #FFF" class="cartTableCell">&nbsp;</td></tr>
+
+
+
+                        <?php
+
+
+                        $totalAmount = 0;
+                        foreach($cartDetails  as $cart){
+                            $brackets = "";
+                            if($cart['optionTitle'] !="" || $cart['optionTitle'] !="&nbsp;" ){
+                                $brackets = "( ".$cart['optionTitle'] . " )";
+
+                            }
+
+                            ?>
+
+                            <tr class="cartTableRow"><td class="cartTableCell">  <span style="margin-left: 1em;"><?php echo $cart['serviceTitle']." ".$brackets ?> </span></td> <td class="cartTableCell"> <?php echo $cart['price'] ?> </td></td><td class="cartTableCell">
+                                    <span style="color: red"><a href="#" data-optiondata ="<?php echo $cart['serviceOptionId'] ?>-#-<?php echo $cart['optionTitle'] ?>-#-<?php echo $cart['serviceId'] ?>" onclick="removePackage(this)" data-price='<?php echo $cart['price'] ?>' >X
+
+                                        </a></span></td></tr>
+
+
+                            <?php
+                            $totalAmount = $totalAmount + $cart['price'];
+
+                        }
+
+                        ?>
 
 
                     </table>
@@ -48,17 +73,132 @@
 
 
                 <div class="clearfix"></div>
+                <form method="post" action="<?php echo $this->url("cart",array("action"=>"process"))?>">
+
+                <div class="box-1" >
+
+                    <table class="table table-condensed cartTable">
+
+                        <tr class="cartTableRow"  style="display:none"><td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF;">
+                                <span style="margin-left: 1em">Select Gateway</span> </td>
+                            <td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF;">
+                                <select class="form-control" name="gateway">
+                                    <option value="razorpay">RazorPay</option>
+                                    <option value="paytm" selected="selected">PayTM</option>
+
+                                </select>
+                            </td>
+                        </tr>
+
+                        <tr class="cartTableRow"><td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF">
+                                <span style="margin-left: 1em"> <button class="btn btn-success" type="submit" id="proceed">Proceed to checkout</button> </span> </td>
+                            <td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF;">
+                                <input type="hidden" name="amount" value="<?php echo $totalAmount;?>" id="totalAmountForm" >
+                                <span style="margin-left: -1em;" id="totalAmount"><?php echo $totalAmount;?></span>
+                            </td>
+                        </tr>
+
+
+                    </table>
+
+
+                </div>
+                </form>
+
+
+                <div class="clearfix"></div>
+
+
 
             </div>
             <!-- /Content Center -->
 
             <!-- Content Right -->
-            <div class="content-right">
+            <div class="content-right"  style="margin-top: 4.1em;">
 
-                <div class="block border" id="advertising">
-                    <div class="block-content"> <img alt="sidebarad" src="images/sb-ad.jpg">
-                        <!-- <div class="advertising-test">300x250<br/>
-                          Ad Banner</div>-->
+                <div class="block border" >
+                    <div class="block-content">
+                        <table class="table table-condensed cartTable">
+                            <tr class="cartTableRow"><td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF">
+                                    <span style="margin-left: 1em">More Services </span> </td>
+                                <td class="cartTableCell" style="background-color: #4D4D4D; font: 900; color: #FFF;">
+                                    <span style="margin-left: -1em;"></span> </td></td></tr>
+
+                            <?php
+                            foreach($serviceOptions as $serviceOption => $so1 ){
+                            ?>
+                            <tr class="serviceHeading">
+                                    <td style="background-color: #4D4D4D; font: 900; color: #FFF;">
+                                        <?php echo $serviceOption?>
+                                        </td>
+                                </tr>
+
+
+                            <?php
+                                foreach($so1 as $service){
+
+                                    ?>
+                                    <tr>
+                                    <td>
+
+
+                                        <table>
+                                            <tr >
+                                                <td style="width: 20%;">
+
+                                                 <span>  <input style="display: block !important; float: left" type="checkbox"
+                                                       name="price" data-optiondata="<?php echo $service['serviceOptionId'] ?>-#-<?php echo $service['optionTitle'] ?>-#-<?php echo $service['serviceId'] ?>-#-<?php echo $serviceOption ?>"
+                                                       value="<?php echo $service['price'] ?>" onchange="addtoCart(this);"> </span>
+
+                                                </td>
+                                                <td style="width: 80%">
+                                                    <span style="margin-left: 0.5em;"><?php echo $service['optionTitle']?><br/>  </span>
+                                                </td>
+                                            </tr>
+
+                                        </table>
+                                    </td>
+                                    </tr>
+
+                             <?php
+
+                                }
+                            ?>
+
+
+
+                            </td>
+                            </tr>
+                            <?php
+
+                            }
+
+                         /*   $brackets = "";
+                            foreach($services as $service){
+                                $brackets = "";
+                                if($service['optionTitle'] !="" || $service['optionTitle'] !="&nbsp;" ){
+                                    $brackets = "( ".$service['optionTitle'] . " )";
+
+                                }
+                                ?>
+                                <tr class="cartTableRow">
+                                    <td class="cartTableCell">
+                                        <span style="margin-left: 1em;"> <?php echo $service['serviceTitle']."<br>".$brackets?></span>
+                                        <span>  <input style="display: block !important; float: left" type="radio"
+                                                       name="price" data-optiondata="<?php echo $service['serviceOptionId'] ?>-#-<?php echo $service['serviceOptionTitle'] ?>"
+                                                       value="<?php echo $service['price'] ?>"></span>
+
+
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                         */
+                            ?>
+
+
+                        </table>
+
                     </div>
                 </div>
 
@@ -92,3 +232,6 @@
 
 
 </style>
+<script>
+    window.totalAmount= <?php echo $totalAmount;?>
+</script>

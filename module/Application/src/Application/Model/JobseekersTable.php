@@ -293,10 +293,10 @@ class JobseekersTable
         $select->where(array("ProfileId"=>$profileId));
         $resultSet = $this->tableGateway->selectWith($select);
         $res = "";
-        if($resultSet->count()>0){
-            $res =  "false";
+        if($resultSet->count()==0){
+            $res =  "true";
         } else {
-            $res = "true";
+            $res = "false";
         }
         return $res;
         

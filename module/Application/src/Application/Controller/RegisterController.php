@@ -75,6 +75,7 @@ class RegisterController extends AbstractActionController
             $jobseekersDetails = new \Application\Model\Jobseekersdetails();
 
            
+            $userData['Name']=$request->getPost('custname');
             $userData['Email']=$request->getPost('email');
             $userData['Password']=$request->getPost('passwd');
             $userData['Mobile']=$request->getPost('phone');
@@ -233,7 +234,7 @@ class RegisterController extends AbstractActionController
            // var_dump($res->count()); exit;
             if($res->count()==1){
                 $user_session = new Container('user');
-		$user_session->userDetails = $res->current();
+		        $user_session->userDetails = $res->current();
                 
                 $return['status'] = "success";
             } else {

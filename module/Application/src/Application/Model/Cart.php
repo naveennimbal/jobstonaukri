@@ -22,9 +22,13 @@ class Cart implements InputFilterAwareInterface
 
     protected $inputFilter;
     public $cartId;
+    public $orderId;
     public $userId;
     //public $url;
     public $serviceId;
+    public $centerCode;
+    public $response;
+    public $responseText;
     public $dateAdded;
     public $status;
 
@@ -32,8 +36,12 @@ class Cart implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->cartId     = (isset($data['cartId'])) ? $data['cartId'] : null;
+        $this->cartId     = (isset($data['orderId'])) ? $data['orderId'] : null;
         $this->userId     = (isset($data['userId'])) ? $data['userId'] : null;
         $this->serviceId     = (isset($data['serviceId'])) ? $data['serviceId'] : null;
+        $this->serviceId     = (isset($data['centerCode'])) ? $data['centerCode'] : null;
+        $this->serviceId     = (isset($data['response'])) ? $data['response'] : null;
+        $this->serviceId     = (isset($data['responseText'])) ? $data['responseText'] : null;
 
 
         $this->dateAdded   = (isset($data['dateAdded'])) ? $data['dateAdded']  : date('Y-M-d H:i:s');
@@ -69,6 +77,54 @@ class Cart implements InputFilterAwareInterface
 
                 ),
             ));
+            $inputFilter->add(array(
+                'name'     => 'orderId',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name'     => 'responseText',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name'     => 'centerCode',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name'     => 'response',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
             $inputFilter->add(array(
                 'name'     => 'userId',
                 //'required' => true,

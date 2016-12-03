@@ -37,6 +37,20 @@ class Module
         }, 100);
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+
+        $this->initSession(array(
+            'remember_me_seconds' => 60 * 60 * 24 * 30,
+            'use_cookies' => true,
+            'cookie_httponly' => true,
+        ));
+    }
+
+    public function initSession($config){
+        $sessionConfig = new SessionConfig();
+        $sessionConfig->setOptions($config);
+        $sessionManager = new SessionManager($sessionConfig);
+        $sessionManager->start();
+        Container::setDefaultManager($sessionManager);
     }
 
     public function getConfig()

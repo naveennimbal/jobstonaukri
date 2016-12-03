@@ -37,6 +37,8 @@ use Application\Model\ServiceOption;
 use Application\Model\ServiceOptionTable;
 use Application\Model\Jobseekersdetails;
 use Application\Model\JobseekersdetailsTable;
+use Application\Model\Cart;
+use Application\Model\CartTable;
 
 
 
@@ -219,7 +221,7 @@ class Module
                 },
                 '\Application\Model\CartTable' =>  function($sm) {
                     $tableGateway = $sm->get('CartTableGateway');
-                    $table = new ServiceOptionTable($tableGateway);
+                    $table = new CartTable($tableGateway);
                     return $table;
                 },
                 'CartTableGateway' => function ($sm) {

@@ -273,7 +273,7 @@ $(document).ready(function () {
     /*	Google Map on Homepages
      /* ---------------------------------------------------------------------- */
 
-    var homepageMap = $('#centerMap');
+    /*var homepageMap = $('#centerMap');
 
     homepageMap.gMap({
         address: 'Paris, France',
@@ -307,7 +307,7 @@ $(document).ready(function () {
     /* ---------------------------------------------------------------------- */
     /*	Google Map in contact's
     /* ---------------------------------------------------------------------- */
-    var $map = $('#contact-map');
+    /*var $map = $('#contact-map');
     var $address1 = $("#first-address").html();
     var $address2 = $("#second-address").html();
 
@@ -512,7 +512,7 @@ $(document).ready(function () {
         marker9 = mapcontainer.find(".marker9").html(),
         marker10 = mapcontainer.find(".marker10").html();
 
-    var $jobmap = $("#job-page-map");
+    /*var $jobmap = $("#job-page-map");
     var $jobmap2 = $("#one-job-page-map");
 
     $jobmap.gMap({

@@ -23,7 +23,7 @@ if (PAYTM_ENVIRONMENT == 'PROD') {
     define('PAYTM_MERCHANT_WEBSITE', '3foxies'); //Change this constant's value with Website name received from Paytm
 
 }
-define('PAYTM_CALLBACK_URL',"http://".$_SERVER['SERVER_NAME']."/payment/paytmres");
+define('PAYTM_CALLBACK_URL',"http://".$_SERVER['SERVER_NAME']."/cart/response");
 
 define('PAYTM_REFUND_URL', 'https://'.$PAYTM_DOMAIN.'/oltp/HANDLER_INTERNAL/REFUND');
 define('PAYTM_STATUS_QUERY_URL', 'https://'.$PAYTM_DOMAIN.'/oltp/HANDLER_INTERNAL/TXNSTATUS');

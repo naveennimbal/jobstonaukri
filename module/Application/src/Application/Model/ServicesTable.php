@@ -73,4 +73,33 @@ class ServicesTable
 
     }
 
+
+    public function getServicesByGroup(){
+        $sqlString = "SELECT * FROM services join service_options on services.serviceId=service_options.serviceId ";
+        $sqlString .= " group by services.serviceId";
+
+        // echo $sqlString; exit;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        $serviceArray = array();
+
+       foreach($resultSet as $services){
+           $serviceArray[$services['serviceTitle']] = $this->getServiceOption($services['serviceId']);
+
+       }
+
+        return $serviceArray;
+
+
+    }
+
+    private function getServiceOption($serviceId){
+
+        $sqlString = "SELECT * FROM service_options  where serviceId =  ".$serviceId;
+
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        return $resultSet;
+    }
+
 }

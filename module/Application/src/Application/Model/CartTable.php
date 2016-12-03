@@ -48,15 +48,97 @@ class CartTable
     }
 
 
+
+    public function getCart($userId){
+        $sqlString = "SELECT * FROM resume_cart ";
+        $sqlString .= " join services on services.serviceId=resume_cart.serviceId";
+        $sqlString .= " join service_options on service_options.serviceOptionId=resume_cart.serviceOptionId";
+        $sqlString .= " where resume_cart.UserId = '".$userId."' and resume_cart.status != 1" ;
+        //var_dump($sqlString); exit;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        return $resultSet;
+
+    }
+
+    public function checkIfExist($data){
+        $where['UserId'] = $data['UserId'];
+        $where['serviceId'] = $data['serviceId'] ;
+        $where['serviceOptionId'] =$data['serviceOptionId'] ;
+        $where['status'] = 0;
+        //print_r($where);
+
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where($where);
+       //echo  $select->getSqlString(); exit;
+        $resultSet = $this->tableGateway->selectWith($select);
+
+        //return $resultSet->current();
+        return $resultSet;
+    }
+//
+    public function updateOrderId($userId, $orderId ){
+        $set = array(
+            'orderId' => $orderId,
+            //'status'=>"0"
+        );
+        //echo $userId."---------".$orderId."<br>";
+        $return =  $this->tableGateway->update($set,array("userId"=>$userId,"status"=>"0"));
+        //var_dump($return); exit;
+        //$sqlString = "UPDATE resume_cart SET orderId = '".$orderId."' WHERE userId ='".$userId."' AND status='0'";
+        //echo $sqlString; exit;
+       // $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        return $return;
+    }
+
+    public function updateResponse($data,$where){
+        /*$sqlData = array(
+            'userId'=>$userId,
+            'orderId' => $orderId,
+            'status'=>"1"
+        );*/
+        return $this->tableGateway->update($data,$where);
+
+    }
+
+
     public function save($data){
         $Sqldata = array(
             'cartId'=>$data->cartId,
-            'userId'=>$data->userId,
+            'userId'=>$data->UserId,
             'serviceId'=>$data->serviceId,
             'serviceOptionId'=>$data->serviceOptionId,
 
         );
         return $this->tableGateway->insert($Sqldata);
+    }
+
+
+    public function removeCart($data){
+        //$where['UserId'] = $data['UserId'];
+        //$where['serviceId'] = $data['serviceId'] ;
+        //$where['serviceOptionId'] =$data['serviceOptionId'] ;
+        //$where['status'] = 0;
+
+        $sqlString = "DELETE FROM resume_cart where userId='".$data['UserId']."' AND serviceId='".$data['serviceId'] ."' AND serviceOptionId='".$data['serviceOptionId']."' AND status !='1'" ;
+        //var_dump($sqlString); exit;
+
+        //echo  $select->getSqlString(); exit;
+        try{
+            $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+        } catch(\Exception $e){
+            echo $e->getMessage();
+        }
+
+        //return $resultSet->current();
+        if($resultSet){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 
