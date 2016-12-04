@@ -114,6 +114,13 @@ function addtoCart(ele){
             setTimeout("hideStatusModal()",1000);
 
         }
+        if(msg.status=="exceed"){
+            $("#statusMessage").html("Amount exceed for cart <br> Please process it then try again ");
+            $("#statusModal").modal('show');
+            //addCartTableRow(ele);
+            setTimeout("hideStatusModal()",1000);
+
+        }
 
     });
 

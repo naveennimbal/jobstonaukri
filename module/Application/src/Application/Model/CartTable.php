@@ -61,6 +61,28 @@ class CartTable
 
     }
 
+    public function getTotalCartCost($userId){
+        $where['UserId'] = $userId;
+        $where['status'] = 0;
+        //print_r($where);
+
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where($where);
+        //echo  $select->getSqlString(); exit;
+        $resultSet = $this->tableGateway->selectWith($select);
+        $totalAmount = 0;
+        foreach($resultSet as $res){
+           // $totalAmount= $totalAmount +  $res->price;
+            echo $res->price;
+        }
+        exit;
+
+        return $totalAmount;
+
+    }
+
     public function checkIfExist($data){
         $where['UserId'] = $data['UserId'];
         $where['serviceId'] = $data['serviceId'] ;

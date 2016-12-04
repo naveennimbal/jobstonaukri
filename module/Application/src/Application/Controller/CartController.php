@@ -87,9 +87,16 @@ class CartController extends AbstractActionController{
                     $return['status']="exist";
                 } else {
                     $data = (object)$data;
+                    // inserting the capping in cart
+                    $totalAmount = 0;
+                    $totalAmount = $this->getCartTable()->getTotalCartCost($user->UserId);
+                    if($totalAmount <= 20000){
+                        $ret = $this->getCartTable()->save($data);
+                        $return['status']="added";
 
-                    $ret = $this->getCartTable()->save($data);
-                    $return['status']="added";
+                    } else {
+                        $return['status']="exceed";
+                    }
 
                 }
 
