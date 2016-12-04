@@ -83,12 +83,13 @@ class CartController extends AbstractActionController{
                 $data['UserId'] = $user->UserId;
                 $ifExists = $this->getCartTable()->checkIfExist($data);
                 //var_dump($ifExists->count()); exit;
-                if($ifExists->count() >= 1){
+                if($ifExists->count() == 1){
                     $return['status']="exist";
                 } else {
                     $data = (object)$data;
                     // inserting the capping in cart
                     $totalAmount = 0;
+                    //echo $user->UserId; exit;
                     $totalAmount = $this->getCartTable()->getTotalCartCost($user->UserId);
                     if($totalAmount <= 20000){
                         $ret = $this->getCartTable()->save($data);

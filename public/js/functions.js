@@ -92,7 +92,7 @@ function addtoCart(ele){
         method: "POST",
         data: { price : amount,optionId:optionArray[0],serviceId:optionArray[2],"dateAdded":dateAdded },
         beforeSend:function(){
-            showLoader("added");
+            showLoader("Adding package to Cart");
         },
         cache:false
         //dataType: "html"
@@ -118,7 +118,7 @@ function addtoCart(ele){
             $("#statusMessage").html("Amount exceed for cart <br> Please process it then try again ");
             $("#statusModal").modal('show');
             //addCartTableRow(ele);
-            setTimeout("hideStatusModal()",1000);
+            setTimeout("hideStatusModal()",2000);
 
         }
 
@@ -185,7 +185,7 @@ function removePackage(ele){
         method: "POST",
         data: { optionId:optionArray[0],serviceId:optionArray[2]},
         beforeSend:function(){
-            showLoader("removed");
+            showLoader("Removing package from Cart");
         },
         cache:false
         //dataType: "html"
@@ -225,6 +225,8 @@ function hideStatusModal(){
 }
 
 function showLoader(action){
-    $("#statusMessage").html("Packed "+action+" from Cart");
+
+    html = "<span style='display:inline-block; vertical-align:middle'><image src='/images/loader.gif'></span><span style='display:inline-block; vertical-align:middle; margin-left: 2em;'>"+ action+"</span>";
+    $("#statusMessage").html(html);
     $("#statusModal").modal('show');
 }

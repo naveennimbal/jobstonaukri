@@ -62,7 +62,7 @@ class CartTable
     }
 
     public function getTotalCartCost($userId){
-        $where['UserId'] = $userId;
+        /*$where['UserId'] = $userId;
         $where['status'] = 0;
         //print_r($where);
 
@@ -72,12 +72,24 @@ class CartTable
         $select->where($where);
         //echo  $select->getSqlString(); exit;
         $resultSet = $this->tableGateway->selectWith($select);
+        */
+
+        $sqlString = "SELECT so.price FROM service_options so ";
+        $sqlString .= " JOIN services s on s.serviceId = so.serviceId";
+        $sqlString .= " JOIN resume_cart rc on so.serviceOptionid = rc.serviceOptionId";
+        $sqlString .= " where rc.userId = '".$userId."' and rc.status = 0" ;
+        //var_dump($sqlString); exit;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+       // return $resultSet;
+
         $totalAmount = 0;
         foreach($resultSet as $res){
-           // $totalAmount= $totalAmount +  $res->price;
-            echo $res->price;
+            //var_dump($res);
+            $totalAmount= $totalAmount +  $res['price'];
+            //echo $res->price;
         }
-        exit;
+        //exit;
 
         return $totalAmount;
 
