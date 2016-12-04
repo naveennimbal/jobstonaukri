@@ -147,15 +147,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `resume_cart`
 --
 
-CREATE TABLE `resume_cart` (
-  `cartId` int(11) NOT NULL,
-  `userId` varchar(50) NOT NULL DEFAULT '0',
-  `serviceId` int(11) DEFAULT NULL,
-  `serviceOptionId` int(11) DEFAULT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '1',
-  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 CREATE TABLE `services` (
   `serviceId` int(11) NOT NULL,
@@ -201,3 +192,33 @@ ALTER TABLE `resume_cart`
   
   
   ALTER TABLE resume_cart MODIFY userId VARCHAR(50) NOT NULL DEFAULT 0;
+
+CREATE TABLE `resume_cart` (
+  `cartId` int(11) NOT NULL,
+  `orderId` varchar(20) NOT NULL,
+  `userId` varchar(40) DEFAULT '0',
+  `serviceId` int(11) DEFAULT NULL,
+  `serviceOptionId` int(11) DEFAULT NULL,
+  `response` varchar(250) NOT NULL,
+  `responseText` text NOT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  `dateAdded` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=latin1;
+
+
+
+--
+-- Indexes for table `resume_cart`
+--
+ALTER TABLE `resume_cart`
+  ADD PRIMARY KEY (`cartId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `resume_cart`
+--
+ALTER TABLE `resume_cart`
+  MODIFY `cartId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=100;
