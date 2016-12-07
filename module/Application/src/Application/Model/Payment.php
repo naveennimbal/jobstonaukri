@@ -6,12 +6,12 @@ namespace Application\Model;
  use Zend\InputFilter\InputFilterAwareInterface;
  use Zend\InputFilter\InputFilterInterface;
 
- class Users implements InputFilterAwareInterface
+ class Payment implements InputFilterAwareInterface
  {
      public $userId;
      public $email;
-     public $firstName;
-     public $lastName;
+     public $name;
+     //public $lastName;
      public $city;
      public $state;
      public $mobile;
@@ -19,7 +19,9 @@ namespace Application\Model;
      public $passwd;
      public $status;
      public $dateAdded;
-          
+     public $response;
+     public $responseText;
+
      protected $inputFilter;
     
      /*
@@ -35,14 +37,16 @@ namespace Application\Model;
          $this->email = (isset($data['email'])) ? $data['email'] : "";
          $this->passwd = (isset($data['passwd'])) ? $data['passwd'] : "";
          $this->mobile= (isset($data['mobile'])) ? $data['mobile'] : "";
-         $this->firstName = (isset($data['firstName'])) ? $data['firstName'] : "";
-         $this->lastName = (isset($data['lastName'])) ? $data['lastName'] : "";
+         $this->name = (isset($data['name'])) ? $data['name'] : "";
+        // $this->lastName = (isset($data['lastName'])) ? $data['lastName'] : "";
          $this->city = (isset($data['city'])) ? $data['city'] : "";
          $this->state = (isset($data['state'])) ? $data['state'] : "";
          $this->zip = (isset($data['zip'])) ? $data['zip'] : "";
          $this->country = (isset($data['country'])) ? $data['country'] : "";
 
          $this->status = (isset($data['status'])) ? $data['status'] : 1;
+         $this->response = (isset($data['response'])) ? $data['response'] : 1;
+         $this->responseText = (isset($data['responseText'])) ? $data['responseText'] : 1;
          $this->dateAdded = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-m-d');
           
      }
@@ -82,7 +86,7 @@ namespace Application\Model;
              ));
 
              $inputFilter->add(array(
-                 'name'     => 'fname',
+                 'name'     => 'name',
                  //'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),
@@ -93,7 +97,7 @@ namespace Application\Model;
                  ),
              ));
 
-             $inputFilter->add(array(
+            /* $inputFilter->add(array(
                  'name'     => 'lname',
                  //'required' => true,
                  'filters'  => array(
@@ -103,7 +107,7 @@ namespace Application\Model;
                  'validators' => array(
 
                  ),
-             ));
+             ));*/
 
              $inputFilter->add(array(
                  'name'     => 'passwd',
@@ -191,6 +195,29 @@ namespace Application\Model;
                  ),
                  'validators' => array(
              
+                 ),
+             ));
+
+             $inputFilter->add(array(
+                 'name'     => 'response',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
+                 ),
+             ));
+             $inputFilter->add(array(
+                 'name'     => 'responseText',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
                  ),
              ));
              

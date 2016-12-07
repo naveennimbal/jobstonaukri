@@ -86,7 +86,7 @@ class Module
     public function getServiceConfig()
     {
         return array(
-            'factories' => array(
+          /*  'factories' => array(
                 '\Application\Model\PaymentTable' =>  function($sm) {
                     $tableGateway = $sm->get('PaymentTableGateway');
                     $table = new PaymentTable($tableGateway);
@@ -99,6 +99,7 @@ class Module
                     return new TableGateway('payment', $dbAdapter, null, $resultSetPrototype);
                 },
             )
+          */
         );
     }
 

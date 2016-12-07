@@ -39,17 +39,23 @@
                 <div class="box-1 " id="">
                     <br><br>
 
+                    <?php
+
+                    ?>
+                    <br><br>
                 <?php
                    //; var_dump($res);
                     $msg = "";
                     if($res["STATUS"]=="TXN_SUCCESS"){
                     $msg == "Thanks for your payment ";
-                    } else {
+                    } else if($res["STATUS"]=="TXN_FAILURE") {
                         $msg = $res["RESPMSG"];
+                    } else {
+                         $msg = $res["RESPMSG"];
                     }
                 ?>
 
-                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> <?php echo $msg ?> </H1>
+                <H1 id="paymentStatus" style="padding: 100px 20px 100px 20px "> <?php   echo "Your ORDER ID is ". $res['ORDERID']."<br><br>".$msg ?> </H1>
 
                 </div>
                 <br><br>
@@ -92,63 +98,3 @@
 </div>
 </div>
 
-<?php
-    if($gateway=="razorpay"){
-?>
-
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-<script>
-    $(document).ready(function(){
-
-        //  $("#paymentForm").submit(function(){
-
-        var amount = $("#amount").val() * 100;
-        var options = {
-            "key": "rzp_live_PrW4PBBZe317iE",
-            "amount": amount,
-            "name": "JobstoNaukri",
-            "description": $("#description").val(),
-            //"image": "",
-            "handler": function (response){
-                alert("Your Payment is sucessful");
-            },
-            "prefill": {
-                "name": $("#custname").val(),
-                "email": $("#custemail").val()
-            },
-            "notes": {
-                // "address": $("#address").val()
-            },
-            "theme": {
-                "color": "#F37254"
-            }
-        };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
-
-          $("#makePayment").trigger("click",function(e){
-              rzp1.open();
-             e.preventDefault();
-         });
-
-        //      return false;
-
-        //  });
-
-    })
-
-</script>
-<?php
-}
-
-if($gateway=="paytm"){
-?>
-<script>
-
- $("#paymentForm").submit();
-
-</script>
-<?php
-}
-?>

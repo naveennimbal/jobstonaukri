@@ -39,6 +39,8 @@ use Application\Model\Jobseekersdetails;
 use Application\Model\JobseekersdetailsTable;
 use Application\Model\Cart;
 use Application\Model\CartTable;
+use Application\Model\Payment;
+use Application\Model\PaymentTable;
 
 
 

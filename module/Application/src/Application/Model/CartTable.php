@@ -175,6 +175,30 @@ class CartTable
         }
     }
 
+    public function getPaymentStatus($email="",$mobile=""){
+        $select = "SELECT js.Name,js.Email,js.Mobile,rc.status,rc.dateAdded FROM jobseekers js JOIN resume_cart rc on js.UserId=rc.userId   ";
+
+        if($email!="" && $mobile==""){
+            $select .=" WHERE js.Email = '".$email."'";
+        }
+        if($email=="" && $mobile!=""){
+            $select .=" WHERE js.Mobile = '".$mobile."'";
+        }
+        if($email!="" && $mobile!=""){
+            $select .=" WHERE js.Email = '".$email."'";
+        }
+        $select .="  Order by rc.dateAdded desc";
+
+
+        //echo $select; exit;
+        //echo  $select->getSqlString(); exit;
+        $resultSet =  $this->tableGateway->getAdapter()->driver->getConnection()->execute($select);
+
+        //return $resultSet->current();
+        return $resultSet;
+
+    }
+
 
     /*public function getServiceById($serviceId){
         $sqlString = "SELECT * FROM services join servicePrice on services.serviceId=servicePrice.serviceId where services.serviceId = '".$serviceId."'" ;

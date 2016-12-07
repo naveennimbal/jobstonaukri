@@ -9,7 +9,7 @@ use Zend\Paginator\Adapter\DbSelect;
 use Zend\Paginator\Paginator;
 
 
-class UsersTable
+class PaymentTable
 {
     protected $tableGateway;
 
@@ -68,14 +68,55 @@ class UsersTable
     {
         //var_dump($data); exit;
         $Sqldata = array(
-            'email'=>$data->email,
             'name'=>$data->name,
-            'phone'=>$data->phone,
-            'password'=>md5($data->password),
+            'email'=>$data->email,
+            'mobile'=>$data->mobile,
+            'amount'=>$data->amount,
+            'package'=>$data->package,
+            'gateway'=>$data->gateway,
             'status'=>$data->status,
-            'date_added'=>$data->date_added,
+            'orderId'=>$data->orderId,
+            'asm'=>$data->asm,
+            'tlName'=>$data->tlName,
+            'agentName'=>$data->agentName,
         );
+        //var_dump($Sqldata); exit;
         return $this->tableGateway->insert($Sqldata);
+    }
+
+
+    public function updateStatus($orderId,$status,$response,$responseText){
+        $where = array("orderId"=>$orderId);
+        $data = array(
+            "status"=>$status,
+            "response"=>$response,
+            "responseText"=>$responseText
+        );
+        return $this->tableGateway->update($data,$where);
+
+    }
+
+    public function getPaymentStatus($orderId = "" ,$email="",$mobile=""){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $where = array();
+        if($orderId!=""){
+            $where['orderId'] = $orderId;
+        }
+        if($email!=""){
+            $where['email'] = $email;
+        }
+        if($mobile!=""){
+            $where['mobile'] = $mobile;
+        }
+
+        $select->where($where);
+        //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
+        //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
+
+        return  $resultSet = $this->tableGateway->selectWith($select);
+
     }
     
     public function update($data)

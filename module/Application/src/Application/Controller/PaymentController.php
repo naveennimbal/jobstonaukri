@@ -51,7 +51,7 @@ class PaymentController extends AbstractActionController{
     }
 
 
-    private function paytm($mobile,$email,$amount){
+    private function paytm($mobile,$email,$amount,$orderId){
        /* $paramList = array(
             //"REQUEST_TYPE"=>"DEFAULT",
             "MID"=>PAYTM_MERCHANT_MID,
@@ -68,7 +68,7 @@ class PaymentController extends AbstractActionController{
        */
 
         $paramList["MID"] = PAYTM_MERCHANT_MID;
-        $paramList["ORDER_ID"] = uniqid("J2N");
+        $paramList["ORDER_ID"] = $orderId;
         $paramList["CUST_ID"] = uniqid("Cust_");
         $paramList["INDUSTRY_TYPE_ID"] = "Retail120";
         $paramList["CHANNEL_ID"] = "WEB";
@@ -76,7 +76,7 @@ class PaymentController extends AbstractActionController{
         $paramList["WEBSITE"] = PAYTM_MERCHANT_WEBSITE;
         $paramList["MOBILE_NO"] = $mobile;
         $paramList["EMAIL"] = $email;
-        $paramList["CALLBACK_URL"]= "http://www.jobs.loc/payment/response";
+        $paramList["CALLBACK_URL"]= "http://www.jobstonaukri.loc/payment/response";
 
         $checkSum = $this->getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 
@@ -101,7 +101,27 @@ class PaymentController extends AbstractActionController{
         if($gateway=="paytm"){
 
             if ($mobile!="" && !empty($mobile) && $email!="" && !empty($email) && $amount!="" && !empty($amount)  ){
-                $params =  $this->paytm($mobile,$email,$amount);
+                $orderId=uniqid("J2N");
+                $package = "j2n";
+                $asm = "asm";
+                $tlName = "tlName";
+                $agentName = "agent";
+                $data =  array(
+                'name'=>$name,
+                'email'=>$email,
+                'mobile'=>$mobile,
+                'amount'=>$amount,
+                'package'=>$package,
+                'gateway'=>$gateway,
+                'status'=>0,
+                'orderId'=>$orderId,
+                'asm'=>$asm,
+                'tlName'=>$tlName,
+                'agentName'=>$agentName,
+                );
+                $data = (object) $data;
+                $this->getPaymentTable()->addUser($data);
+                $params =  $this->paytm($mobile,$email,$amount,$orderId);
             } else {
                 return $this->redirect()->toRoute('payment', array(
                     'error' => "1"
@@ -124,12 +144,44 @@ class PaymentController extends AbstractActionController{
 
     public function responseAction()
     {
-       // var_dump($_POST); exit;
+        //var_dump($_POST); exit;
         //echo "akgkasj";
+        $status = 0;
+        if($_POST['STATUS']=="TXN_SUCCESS"){
+            $status = 1;
+        }else if($_POST['STATUS']=="TXN_FAILURE"){
+            $status = 2;
+        }
+        $response = $_POST['RESPMSG'];
+        $responseText = json_encode($_POST);
+
+        $orderId = $_POST['ORDERID'];
+        $this->getPaymentTable()->updateStatus($orderId,$status,$response,$responseText);
         return new ViewModel(array("res"=>$_POST));
     }
 
 
+
+    public function confirmAction(){
+        $request = $this->getRequest();
+        $return = array();
+        $return['post']="0";
+        $count = 0;
+        if($request->isPost()){
+            $return['post']="1";
+            $orderId = $request->getPost('orderId');
+            $mobile = $request->getPost('mobile');
+            $email = $request->getPost('email');
+
+            //var_dump($this->getRequest()->getPost('email')); exit;
+            $return = $this->getPaymentTable()->getPaymentStatus($orderId ,$email,$mobile);
+            $count = $return->count();
+
+        }
+        $this->layout('layout/backoffice');
+        return new ViewModel(array("result"=>$return,"count"=>$count));
+
+    }
 
     private function addpaytm(){
 
