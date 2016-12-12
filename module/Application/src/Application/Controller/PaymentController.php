@@ -50,22 +50,12 @@ class PaymentController extends AbstractActionController{
         return new ViewModel();
     }
 
+    public function checkSession(){
+
+    }
+
 
     private function paytm($mobile,$email,$amount,$orderId){
-       /* $paramList = array(
-            //"REQUEST_TYPE"=>"DEFAULT",
-            "MID"=>PAYTM_MERCHANT_MID,
-            "ORDER_ID"=>uniqid("ORD"),
-            "CUST_ID"=>"cunav",
-            "TXN_AMOUNT"=>$amount,
-            "CHANNEL_ID"=>"WEB",
-            "INDUSTRY_TYPE_ID"=>"Retail",
-            "WEBSITE"=>PAYTM_MERCHANT_WEBSITE,
-            //"CHECKSUMHASH"=>
-            "MOBILE_NO"=>$mobile,
-            "EMAIL"=>$email
-        );
-       */
 
         $paramList["MID"] = PAYTM_MERCHANT_MID;
         $paramList["ORDER_ID"] = $orderId;
@@ -149,14 +139,20 @@ class PaymentController extends AbstractActionController{
         $status = 0;
         if($_POST['STATUS']=="TXN_SUCCESS"){
             $status = 1;
+            $response = $_POST['RESPMSG'];
+            $responseText = json_encode($_POST);
         }else if($_POST['STATUS']=="TXN_FAILURE"){
             $status = 2;
+            $response = $_POST['RESPMSG'];
+            $responseText = json_encode($_POST);
         }
-        $response = $_POST['RESPMSG'];
-        $responseText = json_encode($_POST);
+        $paytmAmount = $_POST['TXNAMOUNT'];
+        $txnId = $_POST['TXNID'];
+
+
 
         $orderId = $_POST['ORDERID'];
-        $this->getPaymentTable()->updateStatus($orderId,$status,$response,$responseText);
+        $this->getPaymentTable()->updateStatus($orderId,$status,$response,$responseText,$paytmAmount,$txnId);
         return new ViewModel(array("res"=>$_POST));
     }
 
@@ -167,6 +163,7 @@ class PaymentController extends AbstractActionController{
         $return = array();
         $return['post']="0";
         $count = 0;
+        $nothing = 0;
         if($request->isPost()){
             $return['post']="1";
             $orderId = $request->getPost('orderId');
@@ -174,12 +171,17 @@ class PaymentController extends AbstractActionController{
             $email = $request->getPost('email');
 
             //var_dump($this->getRequest()->getPost('email')); exit;
-            $return = $this->getPaymentTable()->getPaymentStatus($orderId ,$email,$mobile);
-            $count = $return->count();
+            if($orderId!="" || $mobile!="" || $email!=""){
+                $return = $this->getPaymentTable()->getPaymentStatus($orderId ,$email,$mobile);
+                $count = $return->count();
+                $nothing = 1;
+            }
+
 
         }
+
         $this->layout('layout/backoffice');
-        return new ViewModel(array("result"=>$return,"count"=>$count));
+        return new ViewModel(array("result"=>$return,"count"=>$count,"nothing"=>$nothing));
 
     }
 

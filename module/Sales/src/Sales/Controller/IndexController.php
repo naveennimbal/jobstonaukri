@@ -49,17 +49,18 @@ class IndexController extends AbstractActionController
 
     public function confirmAction(){
         $request = $this->getRequest();
-
+        $result = array();
+        $count = 0;
         if($request->isPost()){
             $email = $request->getPost('email');
             $mobile = $request->getPost('mobile');
 
             $result = $this->getCartTable()->getPaymentStatus($email,$mobile);
 
-            return new ViewModel(array("result"=>$result));
-        } else{
-            echo "sdkjhdjskh";
+            return new ViewModel(array("result"=>$result,"count"=>$count));
         }
+
+        return new ViewModel(array("result"=>$result,"count"=>$count));
 
     }
 }

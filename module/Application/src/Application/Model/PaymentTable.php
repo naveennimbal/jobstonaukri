@@ -85,12 +85,14 @@ class PaymentTable
     }
 
 
-    public function updateStatus($orderId,$status,$response,$responseText){
+    public function updateStatus($orderId,$status,$response,$responseText,$amount,$txnId){
         $where = array("orderId"=>$orderId);
         $data = array(
             "status"=>$status,
             "response"=>$response,
-            "responseText"=>$responseText
+            "responseText"=>$responseText,
+            "paytmAmount"=>$amount,
+            "txnId"=>$txnId
         );
         return $this->tableGateway->update($data,$where);
 
