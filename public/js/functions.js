@@ -69,6 +69,16 @@ $(document).ready(function(){
         return false;
     })
 
+
+
+
+
+    //this is for the broadcasting the resume
+    $("#broadcastForm").submit(function(){
+        alert($("#industry").val());
+        //return false;
+    });
+
 });
 
 

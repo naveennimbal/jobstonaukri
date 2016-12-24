@@ -11,6 +11,7 @@ return array(
 
         'Application',
         'Sales',
+        'Crm',
         'ZendDeveloperTools',
 		'BjyProfiler'	
     ),

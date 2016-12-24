@@ -1,0 +1,81 @@
+<!-- Page Heading -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Dashboard <small>Statistics </small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="active">
+                <i class="fa fa-dashboard"></i> Broadcast the Resume
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- /.row -->
+
+
+
+<div class="row">
+    <div class="col-lg-12 col-md-6">
+
+            <form role="form" method="post" id="broadcastForm" action="<?php echo  $this->url("broadcast",array("controller"=>"broadcast","action"=>"process")) ?>" enctype="multipart/form-data">
+
+                <div class="col-lg-12">
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="text" placeholder="Search with Email" name="email">
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+
+                    <div class="form-group">
+                        <label>Resume</label>
+                        <input class="form-control" type="file" placeholder="Upload Resume --Only docx files" name="resume">
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+
+                    <div class="form-group">
+                        <label>Industry</label>
+                        <select multiple="multiple" name="industry" id="industry" class="form-control" style="height: 255px;">
+                            <option selected="selected" value=""> Select Industries</option>
+                            <?php
+                                foreach($industries as $ind ){
+
+                                    ?>
+                                    <option value="<?php echo $ind['Ind_Code']?>"> <?php echo $ind['Ind_Desc']?></option>
+
+                            <?php
+                                }
+                            ?>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="margin-top:25px; margin-left: 25px; width:18em ;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Broadcast Resume &nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+                    </div>
+                </div>
+
+            </form>
+
+
+    </div>
+
+
+
+</div>
+<!-- /.row -->
+
+

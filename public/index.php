@@ -28,6 +28,26 @@ define('PAYTM_CALLBACK_URL',"http://".$_SERVER['SERVER_NAME']."/cart/response");
 define('PAYTM_REFUND_URL', 'https://'.$PAYTM_DOMAIN.'/oltp/HANDLER_INTERNAL/REFUND');
 define('PAYTM_STATUS_QUERY_URL', 'https://'.$PAYTM_DOMAIN.'/oltp/HANDLER_INTERNAL/TXNSTATUS');
 define('PAYTM_TXN_URL', 'https://'.$PAYTM_DOMAIN.'/oltp-web/processTransaction');
+
+
+$basedir = dirname(__DIR__);
+
+define('RESUME_DIR_PATH', __DIR__."/resume/");
+
+// This is the mail config
+define('MAIL_HOST', "md-in-34.webhostbox.net");
+define('MAIL_USERNAME', "broadcast@jobstonaukri.com");
+define('MAIL_PASSWORD', "naveen");
+define('MAIL_CONNECTION', "ssl");
+define('MAIL_PORT', "465");
+
+
+
+
+
+
+//echo RESUME_DIR_PATH; exit;
+
 /**
  * This makes our life easier when dealing with paths. Everything is relative
  * to the application root now.
