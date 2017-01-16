@@ -240,3 +240,33 @@ function showLoader(action){
     $("#statusMessage").html(html);
     $("#statusModal").modal('show');
 }
+
+$(document).ready(function(){
+    $("#capture").click(function () {
+        capHtml = $("#captureTd").html();
+        captureOrderId = $("#capture").attr("rel");
+
+        $.ajax({
+                method: "POST",
+                url: "/payment/capture",
+                beforeSend:function(){$("#captureTd").html("Capturing Wait...")},
+                data: { orderId: captureOrderId , location: "Boston" }
+            })
+            .done(function( msg ) {
+               if(msg.noAdmin==2){
+                   alert("no a valid request");
+                   $("#captureTd").html(capHtml);
+               }
+                if(msg.noAdmin==1){
+                    alert("Payment captured");
+                    $("#captureTd").html("Captured By "+msg.admin);
+                }
+                if(msg.noAdmin==0){
+                    window.location = "/payment/login";
+                }
+
+            });
+    })
+
+})
+

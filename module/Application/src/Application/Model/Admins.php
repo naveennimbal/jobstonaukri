@@ -17,35 +17,29 @@ use Zend\InputFilter\InputFilterInterface;
 
 
 
-class Cart implements InputFilterAwareInterface
+class Admins implements InputFilterAwareInterface
 {
 
     protected $inputFilter;
-    public $cartId;
-    public $orderId;
     public $userId;
-    //public $url;
-    public $serviceId;
-    public $centerCode;
-    public $response;
-    public $responseText;
+    public $password;
     public $dateAdded;
-    public $status;
+    //public $url;
+    public $dateModified;
+    public $privilege;
+
+    public $active;
 
 
     public function exchangeArray($data)
     {
-        $this->cartId     = (isset($data['cartId'])) ? $data['cartId'] : null;
-        $this->orderId     = (isset($data['orderId'])) ? $data['orderId'] : null;
         $this->userId     = (isset($data['userId'])) ? $data['userId'] : null;
-        $this->serviceId     = (isset($data['serviceId'])) ? $data['serviceId'] : null;
-        $this->centerCode     = (isset($data['centerCode'])) ? $data['centerCode'] : null;
-        $this->response     = (isset($data['response'])) ? $data['response'] : null;
-        $this->responseText     = (isset($data['responseText'])) ? $data['responseText'] : null;
+        $this->password     = (isset($data['password'])) ? $data['password'] : null;
+        $this->dateAdded     = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-M-d H:i:s');
+        $this->dateModified     = (isset($data['dateModified'])) ? $data['dateModified'] : date('Y-M-d H:i:s');
+        $this->privilege     = (isset($data['privilege'])) ? $data['privilege'] : null;
+        $this->active     = (isset($data['active'])) ? $data['active'] : 1;
 
-
-        $this->dateAdded   = (isset($data['dateAdded'])) ? $data['dateAdded']  : date('Y-M-d H:i:s');
-        $this->status   = (isset($data['status'])) ? $data['status']  : null;
 
     }
 
@@ -67,65 +61,6 @@ class Cart implements InputFilterAwareInterface
             $factory = new InputFactory();
 
             $inputFilter->add(array(
-                'name'     => 'cartId',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-            $inputFilter->add(array(
-                'name'     => 'orderId',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-
-            $inputFilter->add(array(
-                'name'     => 'responseText',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-
-            $inputFilter->add(array(
-                'name'     => 'centerCode',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-
-            $inputFilter->add(array(
-                'name'     => 'response',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-
-            $inputFilter->add(array(
                 'name'     => 'userId',
                 //'required' => true,
                 'filters'  => array(
@@ -136,22 +71,8 @@ class Cart implements InputFilterAwareInterface
 
                 ),
             ));
-
             $inputFilter->add(array(
-                'name'     => 'serviceId',
-                //'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-
-                ),
-            ));
-
-
-            $inputFilter->add(array(
-                'name'     => 'serviceOptionId',
+                'name'     => 'password',
                 //'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -175,7 +96,7 @@ class Cart implements InputFilterAwareInterface
             ));
 
             $inputFilter->add(array(
-                'name'     => 'status',
+                'name'     => 'dateModified',
                 //'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -185,6 +106,32 @@ class Cart implements InputFilterAwareInterface
 
                 ),
             ));
+
+            $inputFilter->add(array(
+                'name'     => 'privilege',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
+            $inputFilter->add(array(
+                'name'     => 'active',
+                //'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+
+                ),
+            ));
+
+
 
 
             $this->inputFilter = $inputFilter;

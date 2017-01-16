@@ -99,7 +99,7 @@ class Module
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Industry());
-                    return new TableGateway('cj_mast_indusrty', $dbAdapter, null, $resultSetPrototype);
+                    return new TableGateway('cj_mast_industry', $dbAdapter, null, $resultSetPrototype);
                 },
             )
 

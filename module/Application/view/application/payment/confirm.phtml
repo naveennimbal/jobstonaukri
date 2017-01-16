@@ -2,168 +2,294 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Dashboard <small>Statistics </small>
+            Dashboard
+            <small>Statistics</small>
         </h1>
         <ol class="breadcrumb">
             <li class="active">
-                <i class="fa fa-dashboard"></i> Payment Status
+                <i class="fa fa-dashboard"></i> Capture Payment
             </li>
         </ol>
     </div>
 </div>
 <!-- /.row -->
 
-
-
 <div class="row">
     <div class="col-lg-12 col-md-6">
 
-        <form role="form" method="post" id="confirmPaymentForm" action="<?php echo $this->url("payment",array("action"=>"confirm"))?>">
+        <form role="form" method="post" id="capturePaymentForm"
+              action="<?php echo $this->url("payment", array("action" => "capturepayment")) ?>">
 
-            <div class="col-lg-3">
+            <div class="row">
 
-                <div class="form-group">
-                    <label>Email</label>
-                    <input class="form-control" type="text" placeholder="Search with Email" id="email" name="email">
+                <div class="col-lg-3">
 
+                    <div class="form-group">
+                        <label>Mobile</label>
+                        <input class="form-control" type="text" placeholder="Search with Mobile" id="capturemobile"
+                               name="capturemobile">
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="margin-top:25px; width:18em ;">&nbsp;&nbsp;Search
+                            Payment&nbsp;&nbsp;</button>
+
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-3">
-
-                <div class="form-group">
-                    <label>Mobile</label>
-                    <input class="form-control" type="text" placeholder="Search with Mobile" id="mobile" name="mobile">
-
-                </div>
-            </div>
-            <div class="col-lg-3">
-
-                <div class="form-group">
-                    <label>Order ID</label>
-                    <input class="form-control" type="text" placeholder="Search with Order ID" id="orderId" name="orderId">
-
-                </div>
-            </div>
-
-
-            <div class="col-lg-3">
-
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary" style="margin-top:25px; margin-left: 25px; width:18em ;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;</button>
-
-                </div>
-            </div>
-
         </form>
 
 
     </div>
 
 
+    <!-- /.row -->
 
-</div>
-<!-- /.row -->
+    <?php
+    // echo $noAdmin ; exit;
+    if(isset($noAdmin) && $noAdmin ==1) {
+        ?>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> User Search Results </h3>
-            </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Payment Search Results </h3>
+                </div>
 
 
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Mobile</th>
-                        <th>Date Time </th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th> Name</th>
+                            <th> Email</th>
+                            <th> Mobile</th>
+                            <th> Action</th>
+                        </tr>
+                        </thead>
 
-                    <?php
-                    if($nothing == 1) {
-                        if ($count > 0) {
-                            foreach ($result as $res) {
-                                //var_dump($res); exit;
-                                $res = (array)$res;
+                        <tbody>
+                        <?php
+                        //var_dump($results->count());
+                        if($results->count() > 0 ){
+                            foreach($results as $res) {
+                                //var_dump($res->name);
                                 ?>
 
                                 <tr>
-                                    <td><?php echo $res['name'] ?></td>
-                                    <td><?php echo $res['email'] ?></td>
-                                    <td><?php echo $res['mobile'] ?></td>
-                                    <td><?php echo date('d-m-Y h:i:s', strtotime($res['dateAdded'])) ?>
-                                    <td> <?php if ($res['status'] == 0) {
-                                            echo "Initialized";
-                                        } elseif ($res['status'] == 1) {
-                                            echo "Success";
-                                        } elseif ($res['status'] == 2) {
-                                            echo "Failed";
-                                        } ?>  </td>
+                                    <td><?php echo ucwords($res->name)?></td>
+                                    <td><?php echo $res->email?></td>
+                                    <td><?php echo $res->mobile?></td>
 
+                                    <td id="captureTd">
+                                        <button id="capture" class="btn btn-success" rel="<?php echo $res->orderId?>">Capture</button>
+                                    </td>
                                 </tr>
+
+
                                 <?php
-                                if ($res['status'] == "2") {
-                                    ?>
-                                    <tr style="background-color: #ffc">
-                                        <td>Gateway Response</td>
-                                        <td colspan="6"> <?php echo $res['response'] ?></td>
-                                    </tr>
-                                    <?php
-                                }
-                                if ($res['status'] == "1") {
+                            } // foreach ends here
+                        } else {
+                        ?>
+                            <tr><td colspan="3"> No Payments Found  </td></tr>
+                        <?php
+                        }
+                        ?>
+
+
+                        </tbody>
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php
+    }
+
+    ?>
+
+    <!-- /.row -->
+
+
+    <div class="row">
+        <div class="col-lg-12" style="height: 1em; background-color: #777777">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Payment Status
+                </li>
+            </ol>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12 col-md-6">
+
+            <form role="form" method="post" id="confirmPaymentForm"
+                  action="<?php echo $this->url("payment", array("action" => "confirm")) ?>">
+
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="text" placeholder="Search with Email" id="email" name="email">
+
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <label>Mobile</label>
+                        <input class="form-control" type="text" placeholder="Search with Mobile" id="mobile"
+                               name="mobile">
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <label>Order ID</label>
+                        <input class="form-control" type="text" placeholder="Search with Order ID" id="orderId"
+                               name="orderId">
+
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3">
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" style="margin-top:25px; width:18em ;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search&nbsp;&nbsp;&nbsp;&nbsp;</button>
+
+                    </div>
+                </div>
+
+            </form>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> User Search Results </h3>
+                </div>
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Date Time</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <?php
+                        if ($nothing == 1) {
+                            if ($count > 0) {
+                                foreach ($result as $res) {
+                                    //var_dump($res); exit;
+                                    $res = (array)$res;
                                     ?>
 
-                                    <tr style="background-color: greenyellow">
-                                        <td>Transaction ID</td>
-                                        <td colspan="2"> <?php echo $res['txnId'] ?> </td>
-                                        <td> Amount</td>
-                                        <td colspan="2"><?php echo $res['paytmAmount'] ?>  </td>
+                                    <tr>
+                                        <td><?php echo $res['name'] ?></td>
+                                        <td><?php echo $res['email'] ?></td>
+                                        <td><?php echo $res['mobile'] ?></td>
+                                        <td><?php echo date('d-m-Y h:i:s', strtotime($res['dateAdded'])) ?>
+                                        <td> <?php if ($res['status'] == 0) {
+                                                echo "Initialized";
+                                            } elseif ($res['status'] == 1) {
+                                                echo "Success";
+                                            } elseif ($res['status'] == 2) {
+                                                echo "Failed";
+                                            } ?>  </td>
+
                                     </tr>
+                                    <?php
+                                    if ($res['status'] == "2") {
+                                        ?>
+                                        <tr style="background-color: #ffc">
+                                            <td>Gateway Response</td>
+                                            <td colspan="6"> <?php echo $res['response'] ?></td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    if ($res['status'] == "1") {
+                                        ?>
+
+                                        <tr style="background-color: greenyellow">
+                                            <td>Transaction ID</td>
+                                            <td> <?php echo $res['txnId'] ?> </td>
+                                            <td> Amount</td>
+                                            <td><?php echo $res['paytmAmount'] ?>  </td>
+                                            <td id="captureTd">
+                                                <?php echo ($res['capture'] == 1) ? "Captured by " . ucwords($res['tlName']) : "<button onclick=\"alert('If this Payment belongs to you , Please contact Adminstrator')\">Capture</button>"; ?>
+                                            </td>
+                                        </tr>
+
+                                        <?php
+                                    }
+                                    ?>
+
 
                                     <?php
                                 }
+                            } else {
                                 ?>
 
+                                <tr class="active">
+                                    <td colspan="5">Nothing Found</td>
+
+                                </tr>
 
                                 <?php
                             }
                         } else {
                             ?>
-
-                            <tr class="active">
-                                <td colspan="5">Nothing Found</td>
+                            <tr class="active" style="background-color: #faf2cc">
+                                <td colspan="5">Plesse enter ID Email or Search</td>
 
                             </tr>
 
                             <?php
                         }
-                    } else {
+
                         ?>
-                        <tr class="active" style="background-color: #faf2cc">
-                            <td colspan="5">Plesse enter ID Email or Search</td>
-
-                        </tr>
-
-                    <?php
-                    }
-
-                    ?>
 
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
 
-
+                </div>
             </div>
         </div>
-    </div>
-    <!-- /.row -->
+        <!-- /.row -->
 

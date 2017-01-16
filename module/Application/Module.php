@@ -41,6 +41,8 @@ use Application\Model\Cart;
 use Application\Model\CartTable;
 use Application\Model\Payment;
 use Application\Model\PaymentTable;
+use Application\Model\Admins;
+use Application\Model\AdminsTable;
 
 
 
@@ -76,6 +78,7 @@ class Module
             }
         }, 100);
         $eventManager->attach('dispatch', array($this, 'setLayoutVars'));
+        $eventManager->attach('dispatch', array($this, 'setPaymentLayoutVars'));
         $eventManager->attach('dispatch', array($this, 'sessionVars'));
         $eventManager->attach('dispatch', array($this, 'getServices'));
         $eventManager->attach('dispatch', array($this, 'getPages'));
@@ -254,6 +257,17 @@ class Module
                     $resultSetPrototype->setArrayObjectPrototype(new Payment());
                     return new TableGateway('payment', $dbAdapter, null, $resultSetPrototype);
                 },
+                '\Application\Model\AdminsTable' =>  function($sm) {
+                    $tableGateway = $sm->get('AdminsTableGateway');
+                    $table = new AdminsTable($tableGateway);
+                    return $table;
+                },
+                'AdminsTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Admins());
+                    return new TableGateway('admins', $dbAdapter, null, $resultSetPrototype);
+                },
 
 
 
@@ -263,7 +277,28 @@ class Module
     }
 
 
+    public function setPaymentLayoutVars($e){
+        //$target->layout()->setVariable('name', $admin_session->name);
+        $controller      = $e->getTarget();
+        $controllerClass = get_class($controller);
+        $moduleNamespace = substr($controllerClass, 0, strpos($controllerClass, '\\'));
+        $actionArray = explode('\\', $controllerClass);
+        $action = end($actionArray);
+        // var_dump($action); exit;
+        $action = $e->getRouteMatch()->getMatchedRouteName();
+        $target = $e->getTarget();
+        //var_dump($target); exit;
+        $target->layout()->setVariable('routeName', ucfirst($action));
 
+        // for making the  user name avaialble after login
+        $adminSession = new Container('admin');
+        if(isset($adminSession->admin)){
+            $target->layout()->setVariable('admin', $adminSession->admin);
+        }
+
+        return;
+
+    }
 
     public function setLayoutVars($e){
         //$target->layout()->setVariable('name', $admin_session->name);

@@ -36,3 +36,5 @@ CREATE TABLE role (
   roleName VARCHAR(10) NOT NULL ,
   status TINYINT DEFAULT 1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE payment add column capture int default 0 after orderId ;

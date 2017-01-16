@@ -98,11 +98,25 @@ class PaymentTable
 
     }
 
-    public function getPaymentStatus($orderId = "" ,$email="",$mobile=""){
+    public function captureUpdate($orderId,$tlName){
+        $where = array("orderId"=>$orderId);
+        $data = array(
+            "capture"=>"1",
+            "tlName"=>$tlName,
+
+        );
+       // var_dump($data);
+       // var_dump($where);
+        return $this->tableGateway->update($data,$where);
+
+    }
+
+    public function getPaymentStatus($admin,$orderId = "" ,$email="",$mobile=""){
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
         $where = array();
+        $where['tlName'] = $admin;
         if($orderId!=""){
             $where['orderId'] = $orderId;
         }
@@ -116,11 +130,34 @@ class PaymentTable
         $select->where($where);
         //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
         //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
-
+        //echo $select->getSqlString(); exit;
         return  $resultSet = $this->tableGateway->selectWith($select);
 
     }
-    
+    public function capturePayment($mobile=""){
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $where = array();
+        $where['status'] = 1;
+        $where['capture'] = 0;
+        $where['mobile'] = $mobile;
+        $where['tlName'] = "tlName";
+
+
+
+        $select->where($where);
+        //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
+        //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
+        //echo $select->getSqlString(); exit;
+        return  $resultSet = $this->tableGateway->selectWith($select);
+
+    }
+
+
+
+
+
     public function update($data)
     {
     

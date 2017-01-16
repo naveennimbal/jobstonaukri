@@ -23,6 +23,9 @@ namespace Application\Model;
      public $responseText;
      public $paytmAmount;
      public $txnId;
+     public $capture;
+     public $tlName;
+     public $orderId;
 
      protected $inputFilter;
     
@@ -46,13 +49,19 @@ namespace Application\Model;
          $this->zip = (isset($data['zip'])) ? $data['zip'] : "";
          $this->country = (isset($data['country'])) ? $data['country'] : "";
 
+
+
+         $this->status = (isset($data['status'])) ? $data['status'] : 1;
          $this->status = (isset($data['status'])) ? $data['status'] : 1;
          $this->response = (isset($data['response'])) ? $data['response'] : 1;
          $this->responseText = (isset($data['responseText'])) ? $data['responseText'] : 1;
          $this->paytmAmount = (isset($data['paytmAmount'])) ? $data['paytmAmount'] : 1;
          $this->txnId = (isset($data['txnId'])) ? $data['txnId'] : 1;
          $this->dateAdded = (isset($data['dateAdded'])) ? $data['dateAdded'] : date('Y-m-d');
-          
+         $this->capture = (isset($data['capture'])) ? $data['capture'] : "";
+         $this->tlName = (isset($data['tlName'])) ? $data['tlName'] : "";
+         $this->orderId = (isset($data['orderId'])) ? $data['orderId'] : "";
+
      }
 
      public function setInputFilter(InputFilterInterface $inputFilter)
@@ -259,6 +268,41 @@ namespace Application\Model;
                  ),
                  'validators' => array(
              
+                 ),
+             ));
+
+             $inputFilter->add(array(
+                 'name'     => 'capture',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
+                 ),
+             ));
+
+             $inputFilter->add(array(
+                 'name'     => 'tlName',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
+                 ),
+             ));
+             $inputFilter->add(array(
+                 'name'     => 'orderId',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+
                  ),
              ));
              
