@@ -39,6 +39,9 @@ class PaymentTable
     
         return $resultSet;
     }
+
+
+
     
 
     public function save($data)
@@ -59,7 +62,7 @@ class PaymentTable
             'status'=>$data->status,
             'dateAdded'=>$data->dateAdded,
         );
-        var_dump($Sqldata); exit;
+        //var_dump($Sqldata); exit;
         return $this->tableGateway->insert($Sqldata);
     }
 
@@ -111,12 +114,12 @@ class PaymentTable
 
     }
 
-    public function getPaymentStatus($admin,$orderId = "" ,$email="",$mobile=""){
+    public function getPaymentStatus($orderId = "" ,$email="",$mobile=""){
         $sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
         $where = array();
-        $where['tlName'] = $admin;
+       // $where['tlName'] = $admin;
         if($orderId!=""){
             $where['orderId'] = $orderId;
         }
@@ -128,6 +131,7 @@ class PaymentTable
         }
 
         $select->where($where);
+        $select->order('dateAdded DESC');
         //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
         //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
         //echo $select->getSqlString(); exit;
@@ -155,6 +159,16 @@ class PaymentTable
     }
 
 
+    public function getLastPaymentId(){
+        $sqlString = "Select paymentId from payment ORDER BY paymentId desc limit 1" ;
+        //var_dump($sqlString); exit;
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+
+        //var_dump($resultSet->current()); exit;
+
+        return $resultSet->current();
+
+    }
 
 
 

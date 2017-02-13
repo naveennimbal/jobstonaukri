@@ -60,11 +60,11 @@ class ProfileController extends AbstractActionController
         $cols = $this->getJobseekersTable()->getColumns();
         //echo "<pre>";
         //var_dump($cols); exit;
-      // print_r($userDetails); exit;
+        // print_r($userDetails); exit;
 
         $view = new ViewModel();
         //$view->la
-        $view->setTemplate('application/profile/down.phtml');  // module/Test/view/test/test/
+        //$view->setTemplate('application/profile/down.phtml');  // module/Test/view/test/test/
 
         return $view;
         //return new ViewModel(array("user"=>$userDetails));

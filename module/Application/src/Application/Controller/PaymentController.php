@@ -62,7 +62,7 @@ class PaymentController extends AbstractActionController{
                 $this->layout('layout/backoffice');
                 $view =  new ViewModel(array("nothing"=>0));
 
-                $view->setTemplate("application/payment/confirm.phtml");
+                $view->setTemplate("application/payment/confirm1.phtml");
 
                 return $view;
 
@@ -109,7 +109,8 @@ class PaymentController extends AbstractActionController{
         if($gateway=="paytm"){
 
             if ($mobile!="" && !empty($mobile) && $email!="" && !empty($email) && $amount!="" && !empty($amount)  ){
-                $orderId=uniqid("J2N");
+                //$orderId=uniqid("J2N");
+                $orderId=$this->genrateOrderId();
                 $package = "j2n";
                 $asm = "asm";
                 $tlName = "tlName";
@@ -274,7 +275,7 @@ class PaymentController extends AbstractActionController{
         return new ViewModel(array("res"=>$_POST));
     }
 
-    public function confirmAction(){
+    public function confirm1Action(){
        // echo "here" ; exit;
         $request = $this->getRequest();
         $return = array();
@@ -295,8 +296,8 @@ class PaymentController extends AbstractActionController{
 
                 //var_dump($this->getRequest()->getPost('email')); exit;
                 if ($orderId != "" || $mobile != "" || $email != "") {
-                    //$return = $this->getPaymentTable()->getPaymentStatus($orderId, $email, $mobile);
-                    $return = $this->getPaymentTable()->getPaymentStatus($adminSession->admin,$orderId, $email, $mobile);
+                    $return = $this->getPaymentTable()->getPaymentStatus($orderId, $email, $mobile);
+                    //$return = $this->getPaymentTable()->getPaymentStatus($adminSession->admin,$orderId, $email, $mobile);
                     $count = $return->count();
                     $nothing = 1;
                 }
@@ -353,7 +354,7 @@ class PaymentController extends AbstractActionController{
         $this->layout('layout/backoffice');
         $view =  new ViewModel(array("noAdmin"=>$noAdmin,"admin"=>$admin,"results"=>$results));
 
-        $view->setTemplate("application/payment/confirm.phtml");
+        $view->setTemplate("application/payment/confirm1.phtml");
 
         return $view;
     }
@@ -452,8 +453,20 @@ class PaymentController extends AbstractActionController{
 
     }
 
-    private function paymentMail(){
+    private function genrateOrderId(){
+        $paymentId = $this->getPaymentTable()->getLastPaymentId();
+        //var_dump($paymentId['paymentId']); exit;
+        $orderId = "J2N";
+        $orderId .= "-".date('dmY');
+        $orderId .= "-".$paymentId['paymentId'];
 
+        //
+        return $orderId;
+
+    }
+
+    private function paymentMail(){
+            
 
 
 
