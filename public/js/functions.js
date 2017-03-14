@@ -270,3 +270,9 @@ $(document).ready(function(){
 
 })
 
+
+$("#paymentForm").submit(function(){
+    if($('#tnc').not(':checked')){
+        alert("Please accept Terms and Conditions");
+    }
+});

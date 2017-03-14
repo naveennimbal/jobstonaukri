@@ -67,10 +67,24 @@
                         <div class="input-group" style="padding: 10px;">
                             <span class="input-group-addon" id="basic-addon2">Select Gateway </span>
                             <select class="form-control" name="gateway">
-                                <option value="razorpay">RazorPay</option>
+                               <!-- <option value="razorpay">RazorPay</option> -->
                                 <option value="paytm">PayTM</option>
 
                             </select>
+
+                        </div>
+
+                        <div class="input-group" style="padding: 10px;">
+
+                            <div class="col-lg-12" >
+
+                                <div class="checkbox">
+                                    <label><input id="tnc" type="checkbox" value="1" required   style="display: block !important;" ><a href="<?php echo $this->url("pages",array("id"=>"2"))?>" target="_blank"> Please accept our Terms and Conditions</a> </label>
+                                </div>
+                            </div>
+
+
+
 
                         </div>
 
