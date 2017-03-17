@@ -47,6 +47,7 @@ class JobseekersdetailsTable
         
         $Sqldata = array(
             'Res_Id'=>$data->Res_Id,
+            'jsId'=>$data->jsId,
             'Res_Path'=>$data->Res_Path,
             'New_Res_Path'=>$data->New_Res_Path,
             'Res_Type'=>$data->Res_Type,
@@ -102,6 +103,7 @@ class JobseekersdetailsTable
         //var_dump($data); exit;
         $Sqldata = array(
             'Res_Id'=>$data->Res_Id,
+            'jsId'=>$data->jsId,
             'Res_Path'=>$data->Res_Path,
             'New_Res_Path'=>$data->New_Res_Path,
             'Res_Type'=>$data->Res_Type,
@@ -154,6 +156,7 @@ class JobseekersdetailsTable
     
          $Sqldata = array(
              'Res_Id'=>$data->Res_Id,
+             'jsId'=>$data->jsId,
              'Res_Path'=>$data->Res_Path,
              'New_Res_Path'=>$data->New_Res_Path,
              'Res_Type'=>$data->Res_Type,

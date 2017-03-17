@@ -1,10 +1,12 @@
-<?php 
-   
+<?php
+
     if(!is_object($user)){
         $user = (object)$user;
     }
-     //var_dump($user);
 
+echo "<pre>";
+print_r($user);
+echo "</pre>";
     ?>
 
 <script>
@@ -23,7 +25,7 @@
 
 <div id="content">
   <div id="title">
-    <h1 class="inner job_page title-2"><?php echo ($user->Name == "")? ucwords($user->Name):"No Name"?> <span id="jobs-counter"> - <?php echo ($user->Res_Headline!="")?$user->Res_Headline:""?> </span>
+    <h1 class="inner job_page title-2"><?php echo ($user->Name == "")? "No Name" : ucwords($user->Name)?> <span id="jobs-counter"> - <?php echo ($user->Res_Headline!="")?$user->Res_Headline:""?> </span>
       <ul class="breadcrumb-inner">
         <li> <a href="index.html">Home</a></li>
         <li><a href="candidate.html">Candidate</a></li>
@@ -48,14 +50,21 @@
             <table  border="1" class="list_info">
               <tr>
                 <td>Name</td>
-                <td><?php echo ($user->Name == "")? ucwords($user->Name):"Update Name"?></td>
+                <td><?php echo ($user->Name == "")? "Update Name":ucwords($user->Name)?></td>
               </tr>
               <tr>
                 <td>Age</td>
-                <td><?php 
-                 $dob= $user->Dob;
-                $diff = intval(substr(date('Ymd') - date('Ymd', strtotime($dob)), 0, -4));
-                echo $diff;
+                <td><?php
+                 // print_r($user);
+                 $dob = $user->Dob;
+                  //echo $dob; exit;
+                //$diff = intval(substr(date('Ymd') - date('Ymd', strtotime($dob)), 0, -4));
+                  $today = date('Y-m-d');
+                  $dob1 = date('Y-m-d', strtotime($dob));
+                  //var_dump($dob1);
+                  $diff = abs(strtotime($today) - strtotime($dob));
+                  $years = floor($diff / (365*60*60*24));
+                  echo $years;
                 ?> Years Old</td>
               </tr>
               <tr>
@@ -66,10 +75,10 @@
                 <td>Experiance</td>
                 <td><?php echo isset($user->Yr_Of_Exp)?$user->Yr_Of_Exp:0 ?> Years <?php echo isset($user->Mth_Of_Exp)?$user->Mth_Of_Exp:0 ?> Months </td>
               </tr>
-              <tr>
+             <!-- <tr>
                 <td>Education</td>
                 <td><?php echo isset($user->Edu_Desc)?$user->Edu_Desc:"" ?>, <?php echo isset($user->Edu_Other)?$user->Edu_Other:"" ?> </td>
-              </tr>
+              </tr> -->
               <tr>
                 <td>Career Level</td>
                 <td><?php 
@@ -124,7 +133,7 @@
             <div class="field-container single no_border">
               <div class="header-fields">
                 <div class="title-company">
-                  <div class="title"><a href="#"><?php echo ($user->Name == "")? ucwords($user->Name):"No Name"?></a></div>
+                  <div class="title"><a href="#"><?php echo (trim($user->Name) == "" || trim($user->Name)==null )? "Name not available":ucwords($user->Name)?></a></div>
                   <div class="company"><?php 
                    $dob= $user->Dob;
                 $diff = intval(substr(date('Ymd') - date('Ymd', strtotime($dob)), 0, -4));

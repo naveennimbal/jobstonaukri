@@ -49,29 +49,29 @@ class JobseekersTable
             'UserId'=>$data->UserId,
             'Password'=>md5($data->Password),
             'ProfileId'=>$data->ProfileId,
-            'Xml'=>$data->Xml,
+            //'Xml'=>$data->Xml,
             'DateAdded'=>$data->DateAdded,
             'DateModified'=>$data->DateModified,
             'Validated'=>$data->Validated,
             'Name'=>$data->Name,
             'Email'=>$data->Email,
-            'BlogUrl'=>$data->BlogUrl,
+            //'BlogUrl'=>$data->BlogUrl,
             'Website'=>$data->Website,
             'Microblog'=>$data->Microblog,
             'Active'=>$data->Active,
-            'JobPrompt'=>$data->JobPrompt,
-            'SiteId'=>$data->SiteId,
+            //'JobPrompt'=>$data->JobPrompt,
+            //'SiteId'=>$data->SiteId,
             'ReferredBy'=>$data->ReferredBy,
             'LastActive'=>$data->LastActive,
             'SmsAlert'=>$data->SmsAlert,
             'Email_Auth'=>$data->Email_Auth,
             'Mobile_Auth'=>$data->Mobile_Auth,
-            'Res_Phone_Auth'=>$data->Res_Phone_Auth,
-            'KioskID'=>$data->KioskID,
-            'BranchID'=>$data->BranchID,
+            //'Res_Phone_Auth'=>$data->Res_Phone_Auth,
+            //'KioskID'=>$data->KioskID,
+            //'BranchID'=>$data->BranchID,
             'Mobile'=>$data->Mobile,
-            'Res_Cnt'=>$data->Res_Cnt,
-            'Mob_Cnt'=>$data->Mob_Cnt,
+            //'Res_Cnt'=>$data->Res_Cnt,
+            //'Mob_Cnt'=>$data->Mob_Cnt,
             'Res_Std'=>$data->Res_Std,
             'Res_Phone'=>$data->Res_Phone,
             'Cnt_Code'=>$data->Cnt_Code,
@@ -82,19 +82,19 @@ class JobseekersTable
             'Dob'=>$data->Dob,
             'Gender'=>$data->Gender,
             'Photo_Path'=>$data->Photo_Path,
-            'Current_Resume'=>$data->Current_Resume,
-            'Block_Comp'=>$data->Block_Comp,
-            'Name_Flag'=>$data->Name_Flag,
-            'Email_Flag'=>$data->Email_Flag,
+            //'Current_Resume'=>$data->Current_Resume,
+            //'Block_Comp'=>$data->Block_Comp,
+            //'Name_Flag'=>$data->Name_Flag,
+            //'Email_Flag'=>$data->Email_Flag,
             'Mailing_Address'=>$data->Mailing_Address,
-            'Mailing_Flag'=>$data->Mailing_Flag,
-            'Contact_Flag'=>$data->Contact_Flag,
-            'Shield_Type'=>$data->Shield_Type,
-            'Res_P_Status'=>$data->Res_P_Status,
-            'Res_UP_Status'=>$data->Res_UP_Status,
-            'Res_UM_Status'=>$data->Res_UM_Status,
-            'Res_Mod_Status'=>$data->Res_Mod_Status,
-            'Res_UMod_Status'=>$data->Res_UMod_Status,
+            //'Mailing_Flag'=>$data->Mailing_Flag,
+            //'Contact_Flag'=>$data->Contact_Flag,
+            //'Shield_Type'=>$data->Shield_Type,
+            //'Res_P_Status'=>$data->Res_P_Status,
+            //'Res_UP_Status'=>$data->Res_UP_Status,
+            //'Res_UM_Status'=>$data->Res_UM_Status,
+            //'Res_Mod_Status'=>$data->Res_Mod_Status,
+            //'Res_UMod_Status'=>$data->Res_UMod_Status,
             'Sms_Code'=>$data->Sms_Code,
             'Email_Code'=>$data->Email_Code,
             'Interested_In'=>$data->Interested_In,
@@ -103,17 +103,18 @@ class JobseekersTable
             'Profile_View'=>$data->Profile_View,
             'Delete_Status'=>$data->Delete_Status,
             'Delete_Res'=>$data->Delete_Res,
-            'Delete_Oth_Res'=>$data->Delete_Oth_Res,
+            //'Delete_Oth_Res'=>$data->Delete_Oth_Res,
             'Deleted_Date'=>$data->Deleted_Date,
             'Email_Verify_Date'=>$data->Email_Verify_Date,
             'Mobile_Verify_Date'=>$data->Mobile_Verify_Date,
-            'AutoApply'=>$data->AutoApply,
-            'EmailActive'=>$data->EmailActive,
+            //'AutoApply'=>$data->AutoApply,
+            //'EmailActive'=>$data->EmailActive,
             'fb_id'=>$data->fb_id,
 
         );
         //var_dump($Sqldata); exit;
-        return $this->tableGateway->insert($Sqldata);
+        $this->tableGateway->insert($Sqldata);
+        return $this->tableGateway->lastInsertValue;
     }
 
 
@@ -121,32 +122,32 @@ class JobseekersTable
     {
         //var_dump($data); exit;
         $Sqldata = array(
-              'UserId'=>$data->UserId,
+            'UserId'=>$data->UserId,
             'Password'=>md5($data->Password),
             'ProfileId'=>$data->ProfileId,
-            'Xml'=>$data->Xml,
+            //'Xml'=>$data->Xml,
             'DateAdded'=>$data->DateAdded,
             'DateModified'=>$data->DateModified,
             'Validated'=>$data->Validated,
             'Name'=>$data->Name,
             'Email'=>$data->Email,
-            'BlogUrl'=>$data->BlogUrl,
+            //'BlogUrl'=>$data->BlogUrl,
             'Website'=>$data->Website,
             'Microblog'=>$data->Microblog,
             'Active'=>$data->Active,
-            'JobPrompt'=>$data->JobPrompt,
-            'SiteId'=>$data->SiteId,
+            //'JobPrompt'=>$data->JobPrompt,
+            //'SiteId'=>$data->SiteId,
             'ReferredBy'=>$data->ReferredBy,
             'LastActive'=>$data->LastActive,
             'SmsAlert'=>$data->SmsAlert,
             'Email_Auth'=>$data->Email_Auth,
             'Mobile_Auth'=>$data->Mobile_Auth,
-            'Res_Phone_Auth'=>$data->Res_Phone_Auth,
-            'KioskID'=>$data->KioskID,
-            'BranchID'=>$data->BranchID,
+            //'Res_Phone_Auth'=>$data->Res_Phone_Auth,
+            //'KioskID'=>$data->KioskID,
+            //'BranchID'=>$data->BranchID,
             'Mobile'=>$data->Mobile,
-            'Res_Cnt'=>$data->Res_Cnt,
-            'Mob_Cnt'=>$data->Mob_Cnt,
+            //'Res_Cnt'=>$data->Res_Cnt,
+            //'Mob_Cnt'=>$data->Mob_Cnt,
             'Res_Std'=>$data->Res_Std,
             'Res_Phone'=>$data->Res_Phone,
             'Cnt_Code'=>$data->Cnt_Code,
@@ -157,19 +158,19 @@ class JobseekersTable
             'Dob'=>$data->Dob,
             'Gender'=>$data->Gender,
             'Photo_Path'=>$data->Photo_Path,
-            'Current_Resume'=>$data->Current_Resume,
-            'Block_Comp'=>$data->Block_Comp,
-            'Name_Flag'=>$data->Name_Flag,
-            'Email_Flag'=>$data->Email_Flag,
+            //'Current_Resume'=>$data->Current_Resume,
+            //'Block_Comp'=>$data->Block_Comp,
+            //'Name_Flag'=>$data->Name_Flag,
+            //'Email_Flag'=>$data->Email_Flag,
             'Mailing_Address'=>$data->Mailing_Address,
-            'Mailing_Flag'=>$data->Mailing_Flag,
-            'Contact_Flag'=>$data->Contact_Flag,
-            'Shield_Type'=>$data->Shield_Type,
-            'Res_P_Status'=>$data->Res_P_Status,
-            'Res_UP_Status'=>$data->Res_UP_Status,
-            'Res_UM_Status'=>$data->Res_UM_Status,
-            'Res_Mod_Status'=>$data->Res_Mod_Status,
-            'Res_UMod_Status'=>$data->Res_UMod_Status,
+            //'Mailing_Flag'=>$data->Mailing_Flag,
+            //'Contact_Flag'=>$data->Contact_Flag,
+            //'Shield_Type'=>$data->Shield_Type,
+            //'Res_P_Status'=>$data->Res_P_Status,
+            //'Res_UP_Status'=>$data->Res_UP_Status,
+            //'Res_UM_Status'=>$data->Res_UM_Status,
+            //'Res_Mod_Status'=>$data->Res_Mod_Status,
+            //'Res_UMod_Status'=>$data->Res_UMod_Status,
             'Sms_Code'=>$data->Sms_Code,
             'Email_Code'=>$data->Email_Code,
             'Interested_In'=>$data->Interested_In,
@@ -178,15 +179,16 @@ class JobseekersTable
             'Profile_View'=>$data->Profile_View,
             'Delete_Status'=>$data->Delete_Status,
             'Delete_Res'=>$data->Delete_Res,
-            'Delete_Oth_Res'=>$data->Delete_Oth_Res,
+            //'Delete_Oth_Res'=>$data->Delete_Oth_Res,
             'Deleted_Date'=>$data->Deleted_Date,
             'Email_Verify_Date'=>$data->Email_Verify_Date,
             'Mobile_Verify_Date'=>$data->Mobile_Verify_Date,
-            'AutoApply'=>$data->AutoApply,
-            'EmailActive'=>$data->EmailActive,
+            //'AutoApply'=>$data->AutoApply,
+            //'EmailActive'=>$data->EmailActive,
             'fb_id'=>$data->fb_id,
         );
-        return $this->tableGateway->insert($Sqldata);
+        $this->tableGateway->insert($Sqldata);
+        return $this->tableGateway->lastInsertValue;
     }
     
     public function update($data)
@@ -374,13 +376,14 @@ class JobseekersTable
     }
 
 
+    /*
     public function getUserDetails($userId){
         /*$sql = new Sql($this->tableGateway->adapter);
         $select = $sql->select();
         $select->from($this->tableGateway->getTable());
         $select->where(array("userId"=>$userId));
         $resultSet = $this->tableGateway->selectWith($select);
-        return  $resultSet->current();*/
+        return  $resultSet->current();
        // echo "jdshfkjds"; exit;
         
         $jobseekersCols = array(
@@ -465,6 +468,25 @@ class JobseekersTable
         return $result;
         //var_dump($result); exit;
       }
+
+    */
+
+
+    public function getUserDetails($userId){
+
+        $sqlString = "SELECT * FROM jobseekers js JOIN js_profile jsp ON js.jsId =jsp.jsId WHERE js.jsId= $userId";
+        $sqlString = "SELECT jobseekers.* , cj_ch_jobseekers_res_det.*,cj_mast_city.City_Desc from jobseekers ";
+        $sqlString .= " join cj_ch_jobseekers_res_det on jobseekers.jsId = cj_ch_jobseekers_res_det.jsId ";
+        $sqlString .= " join js_profile  on jobseekers.jsId = js_profile.jsId ";
+        $sqlString .= " join cj_mast_city  on jobseekers.City_Code = cj_mast_city.City_Code ";
+        $sqlString .= " where jobseekers.jsId='".$userId."' group by (jobseekers.jsId) ";
+
+        echo $sqlString; exit;
+
+        $resultSet = $this->tableGateway->getAdapter()->driver->getConnection()->execute($sqlString);
+        //var_dump($resultSet->count()); exit;
+        return $resultSet->current();
+    }
 
 
 

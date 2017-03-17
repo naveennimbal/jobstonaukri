@@ -10,6 +10,7 @@ namespace Application\Model;
  {
 
      public $Res_Id;
+     public $jsId;
      public $Res_Path;
      public $New_Res_Path;
      public $Res_Type;
@@ -63,6 +64,7 @@ namespace Application\Model;
      public function exchangeArray($data)
      {
          $this->Res_Id = (isset($data['Res_Id'])) ? $data['Res_Id'] : '';
+         $this->jsId = (isset($data['jsId'])) ? $data['jsId'] : '';
          $this->Res_Path = (isset($data['Res_Path'])) ? $data['Res_Path'] : '';
          $this->New_Res_Path = (isset($data['New_Res_Path'])) ? $data['New_Res_Path'] : '';
          $this->Res_Type = (isset($data['Res_Type'])) ? $data['Res_Type'] : '';
@@ -125,6 +127,17 @@ namespace Application\Model;
 
              $inputFilter->add(array(
                  'name' => 'Res_Id',
+                 //'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                 ),
+             ));
+
+            $inputFilter->add(array(
+                 'name' => 'jsId',
                  //'required' => true,
                  'filters'  => array(
                      array('name' => 'StripTags'),

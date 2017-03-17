@@ -56,13 +56,14 @@ class ProfileController extends AbstractActionController
         $user_session =  new Container('user');
         $userDetail = $user_session->userDetails;
         if(empty($userDetail)){ return $this->redirect()->toRoute("index",array("action"=>"index","id"=>"0")); }
-        $userDetails = $this->getJobseekersTable()->getUserDetails($userDetail->UserId);
+        $userDetails = $this->getJobseekersTable()->getUserDetails($userDetail->jsId);
         $cols = $this->getJobseekersTable()->getColumns();
         //echo "<pre>";
         //var_dump($cols); exit;
-        // print_r($userDetails); exit;
+        //r
+        //print_r($userDetails); exit;
 
-        $view = new ViewModel();
+        $view = new ViewModel(array("user"=>$userDetails));
         //$view->la
         //$view->setTemplate('application/profile/down.phtml');  // module/Test/view/test/test/
 
@@ -84,4 +85,6 @@ class ProfileController extends AbstractActionController
         return;
         
     }
+
+
 }

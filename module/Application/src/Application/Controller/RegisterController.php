@@ -30,6 +30,7 @@ class RegisterController extends AbstractActionController
     protected $usersTable;
     protected $jobseekersTable;
     protected $jobseekersdetailsTable;
+    protected $jsProfileTable;
 
 
     public function getUsersTable() {
@@ -55,6 +56,14 @@ class RegisterController extends AbstractActionController
         }
         return $this->jobseekersdetailsTable;
     }
+
+    public function getJsProfileTable() {
+        if (!$this->jsProfileTable) {
+            $sm = $this->getServiceLocator();
+            $this->jsProfileTable = $sm->get('\Application\Model\JsprofileTable');
+        }
+        return $this->jsProfileTable;
+    }
     
     
     
@@ -73,6 +82,7 @@ class RegisterController extends AbstractActionController
             $userData = array();
             $detData = array();
             $jobseekersDetails = new \Application\Model\Jobseekersdetails();
+            $jsProfile = new \Application\Model\Jsprofile();
 
            
             $userData['Name']=$request->getPost('custname');
@@ -92,12 +102,19 @@ class RegisterController extends AbstractActionController
                     if($mobileReturn=="true"){
 
                         $user->exchangeArray($userData);
-                        $jobseekersDetails->exchangeArray($detData);
+
                         //var_dump($jobseekersDetails); exit;
                         //$this->getUsersTable()->save($user);
-                        if ($this->getJobseekersTable()->save($user)) {
+                        $lastId = $this->getJobseekersTable()->save($user);
+                        //if ($this->getJobseekersTable()->save($user)) {
+                        if ($lastId) {
 
+                            $detData['jsId'] = $lastId;
+                            $jobseekersDetails->exchangeArray($detData);
                             $this->getJobseekersdetailsTable()->save($jobseekersDetails);
+                            $jsProfile->exchangeArray($detData);
+                            $this->getJsProfileTable()->save($jsProfile);
+
                             $return['status']= "success";
                             $return['message']= " Sucessfully Registered";
                         } else {

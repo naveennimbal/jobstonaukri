@@ -11,6 +11,7 @@ namespace Application;
 
 //use Application\Model\Services;
 
+//use Application\Model\Jsprofile;
 use Zend\Mvc\Application;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
@@ -43,6 +44,8 @@ use Application\Model\Payment;
 use Application\Model\PaymentTable;
 use Application\Model\Admins;
 use Application\Model\AdminsTable;
+use Application\Model\Jsprofile;
+use Application\Model\JsprofileTable;
 
 
 
@@ -267,6 +270,17 @@ class Module
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Admins());
                     return new TableGateway('admins', $dbAdapter, null, $resultSetPrototype);
+                },
+                '\Application\Model\JsprofileTable' =>  function($sm) {
+                    $tableGateway = $sm->get('JsprofileTableGateway');
+                    $table = new JsprofileTable($tableGateway);
+                    return $table;
+                },
+                'JsprofileTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Jsprofile());
+                    return new TableGateway('js_profile', $dbAdapter, null, $resultSetPrototype);
                 },
 
 

@@ -47,7 +47,7 @@ class UserController extends AbstractActionController{
             if(!empty($request->getPost('email')) && !empty($request->getPost('password')) ){
                 $res  = $this->getUsersTable()->login($request->getPost('email'),trim($request->getPost('password')));
                 //echo $request->getPost('password');
-               // var_dump($res->count()); exit;
+                //var_dump($res->count()); exit;
                 if($res->count()>0){
                     //var_dump($res->current()); exit;
 

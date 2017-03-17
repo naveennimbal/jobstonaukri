@@ -9,7 +9,6 @@ CREATE TABLE `pages` (
 
 
 ALTER TABLE `jobseekers`
-DROP `ProfileId`,
 DROP `Xml`,
 DROP `BlogUrl`,
 DROP `JobPrompt`,
@@ -38,7 +37,7 @@ DROP `EmailActive`;
 
 
 ALTER TABLE jobseekers modify UserId varchar(50);
-ALTER TABLE jobseekers modify DROP primary key;
+ALTER TABLE jobseekers DROP primary key;
 
 ALTER TABLE jobseekers add column jsId int auto_increment primary key first;
 
@@ -60,5 +59,7 @@ highestEducation int default "0",
 keySkils varchar(500) default "Not Available",
 dateAdded datetime ,
 dateModified timestamp default current_timestamp on update current_timestamp);
+
+ALTER TABLE cj_ch_jobseekers_res_det ADD COLUMN jsId int NOT NULL AFTER Res_Id;
 
 
