@@ -40,7 +40,7 @@
                     <br><br>
 
 
-                    <form action="<?php if ($gateway=="paytm"){ echo PAYTM_TXN_URL;} else { echo "";}?>" id="paymentForm"  method="post" >
+                    <form action="<?php if ($gateway=="paytm"){ echo PAYTM_TXN_URL;} elseif($gateway=="paynear"){ echo PAYNEAR_REQUEST_URL;} else { echo "";}?>" id="paymentForm"  method="post" >
                         <?php
                             if($gateway=="razorpay") {
                                 ?>
@@ -67,6 +67,25 @@
 
                                     <?php
                                 }
+
+                            }
+                        ?>
+
+                        <?php
+                            if($gateway=="paynear") {
+                                ?>
+
+
+                                <?php
+                                foreach($params as $param=>$val){
+                                    //var_dump($param); exit;
+                                    ?>
+                                    <input type="hidden" name="<?php echo $param ?>" value="<?php echo $val ?>">
+
+                                    <?php
+                                }
+
+
 
                             }
                         ?>

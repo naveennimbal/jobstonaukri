@@ -15,7 +15,6 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Application;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -27,8 +26,6 @@ use Application\Model\UsersTable;
 
 use Zend\View\Model\JsonModel;
 use Zend\View\View;
-
-use Application\Payment\PaynearEpay;
 
 class PaymentController extends AbstractActionController{
 
@@ -114,8 +111,7 @@ class PaymentController extends AbstractActionController{
         $asm = "asm";
         $tlName = "tlName";
         $agentName = "agent";
-        $amount = $amount+0.99;
-        $amount = (float)number_format($amount,2);
+        (float)$amount = floatval(2.00);
 
         if($gateway=="paytm"){
 
@@ -146,21 +142,21 @@ class PaymentController extends AbstractActionController{
            //$params["name"] = $name;
 
         } else if ($gateway=="paynear"){
-           /* $params = array(
-               // "merchantId"=>PAYNEAR_MERCHANT_ID,
-                "referenceNo"=>$orderId,
-                "outletId"=>0,
+            $params = array(
+                "merchantId"=>PAYNEAR_MERCHANT_ID,
+                "referenceNo"=>$this->genrateOrderId(),
                 "apiVersion"=>"2.0.1",
+                "description"=>"J2N Subscription",
+                "outletId"=>0,
                 "currencyCode"=>"INR",
                 "locale"=>"EN-US",
-                "description"=>"J2N Subscription",
                 "amount"=>2.11,
                 "responseURL"=>"http://www.jobstonaukri.loc/payment/pnresponse",
                 "billingContactName"=>$name,
                 "billingAddress"=>"12555",
                 "billingCity"=>"hyderabad",
                 "billingState"=>"telangana",
-                "billingPostalCode"=>500014,
+                "billingPostalCode"=>'500014',
                 "billingCountry"=>"IND",
                 "billingEmail"=>$email,
                 "billingPhone"=>$mobile,
@@ -176,36 +172,6 @@ class PaymentController extends AbstractActionController{
                 "channel"=>"3"
                // "gateway"=>$gateway
             );
-            */
-
-            $params['referenceNo'] = $orderId;
-            $params['outletId'] = 0;
-            $params['apiVersion'] = "2.0.1";
-            $params['currencyCode'] = "INR";
-            $params['locale'] = "EN-US";
-            $params['description'] = "Test Order";
-            $params['amount'] = $amount;
-            $params['channel'] = 3;
-            $params['responseURL'] = "http://www.jobstonaukri.loc/payment/pnresponse";
-            $params['billingContactName'] = $name;
-            $params['billingAddress'] = "201, Sunrise Apt, Punjagutta";
-            $params['billingCity'] = "Hydrabad";
-            $params['billingState'] = "Telangana";
-            $params['billingPostalCode'] = 500082;
-            $params['billingCountry'] = "IND";
-            $params['billingEmail'] = $email;
-            $params['billingPhone'] = $mobile;
-            $params['shippingContactName'] = "";
-            $params['shippingAddress'] ="";
-            $params['shippingCity'] ="";
-            $params['shippingState'] ="";
-            $params['shippingPostalCode'] = "";
-            $params['shippingCountry'] ="";
-            $params['shippingEmail'] ="";
-            $params['shippingPhone'] ="";
-
-           // echo "<pre>";
-            //var_dump($params);
 
             $data =  array(
                 'name'=>$name,
@@ -223,44 +189,66 @@ class PaymentController extends AbstractActionController{
             $data = (object) $data;
             $this->getPaymentTable()->addUser($data);
 
-            $epay = new PaynearEpay(PAYNEAR_MERCHANT_ID, PAYNEAR_MERCHANT_KEY, PAYNEAR_TEST);
-            try{
-                $epay->initiatePayment($params);
-            } catch(Exception $e){
-                echo 'Error:' . $e->getMessage();
-            }
+            $params['secureHash'] =  $this->getPaynearSecureHash($params);
 
-            exit;
+            echo "<pre>";
+            print_r($params);
+
+            $data = json_encode($params);
+            $headers = array(
+                'Accept: application/json',
+                'Content-Type: application/json',
+            );
+            $handle = curl_init();
+            curl_setopt($handle, CURLOPT_URL, PAYNEAR_REQUEST_URL);
+            curl_setopt($handle, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($handle, CURLOPT_SSL_VERIFYHOST, false);
+            curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($handle, CURLOPT_POST, true);
+            curl_setopt($handle, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($handle, CURLOPT_TIMEOUT_MS, 1000);
+            $response = curl_exec($handle);
+            $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+            $curl_errno = curl_errno($handle);
+            $curl_error = curl_error($handle);
+            curl_close($handle);
+
+            if (FALSE === $response)
+                throw new \Exception("fails to connect Server");
+            else if ($curl_errno > 0)
+                throw new \Exception("cURL Error ($curl_errno): $curl_error\n");
+            else if ($httpCode != 200)
+                throw new \Exception("Server Error: {$httpCode} \n ");
+            else {
+
+                $result = json_decode($response, true);
+                var_dump($result); //exit;
+
+                if($this->_isValidResponse($result)){
+                    return $result;
+                } else {
+                    throw new \Exception("Invalid response");
+                }
+            }
 
         }
 
         return new ViewModel(array("params"=>$params,"gateway"=>$gateway));
     }
 
-    public function pnresponseAction(){
 
-        //print_r($_POST);
+    private function _isValidResponse($params)
+    {
 
-        $status = 0;
-        if($_POST['responseCode']=="000"){
-            $status = 1;
-            $response = $_POST['responseMessage'];;
-            $responseText = json_encode($_POST);
-        }else {
-            $status = 2;
-            $response = $_POST['responseMessage'];
-            $responseText = json_encode($_POST);
-        }
-        $paytmAmount = $_POST['amount'];
-        $txnId = $_POST['transactionId'];
+        if(!is_array($params) || empty($params) || !isset($params['secureHash']))
+            return false;
 
-        $orderId = $_POST['orderRefNo'];
-        $this->getPaymentTable()->updateStatus($orderId,$status,$response,$responseText,$paytmAmount,$txnId);
-        return new ViewModel(array("res"=>$_POST));
+        $receivedSecureHash = $params['secureHash'];
+        $generatedSecureHash = $this->getPaynearSecureHash($params);
+
+        return $receivedSecureHash == $generatedSecureHash;
     }
-
-
-
 
     public function getPaymentTable() {
         if (!$this->paymentTable) {
@@ -576,7 +564,25 @@ class PaymentController extends AbstractActionController{
 
     }
 
+    private function getPaynearSecureHash($params)
+    {
+        if(!is_array($params) || empty($params))
+            return false;
 
+        if(isset($params['secureHash']))
+            unset($params['secureHash']);
+
+        $checkSumString = PAYNEAR_MERCHANT_KEY;
+        ksort($params);
+
+        foreach($params as $key => $value){
+            $checkSumString .= '|' . $value;
+        }
+
+        $hash = hash('SHA512', $checkSumString);
+
+        return strtoupper($hash);
+    }
 
     private function paymentMail(){
             
