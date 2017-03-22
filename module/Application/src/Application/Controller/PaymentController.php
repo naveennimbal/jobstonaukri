@@ -114,8 +114,7 @@ class PaymentController extends AbstractActionController{
         $asm = "asm";
         $tlName = "tlName";
         $agentName = "agent";
-        $amount = $amount+0.99;
-        $amount = (float)number_format($amount,2);
+
 
         if($gateway=="paytm"){
 
@@ -177,6 +176,10 @@ class PaymentController extends AbstractActionController{
                // "gateway"=>$gateway
             );
             */
+
+            $amount = $this->getRoundPaynear($amount);
+
+            //var_dump($amount); exit;
 
             $params['referenceNo'] = $orderId;
             $params['outletId'] = 0;
@@ -576,6 +579,26 @@ class PaymentController extends AbstractActionController{
 
     }
 
+
+
+    private function getRoundPaynear($amount){
+
+        $rest =  (int)substr($amount,-2,2);
+
+        if ($rest > 49 ){
+            $value = 100 - $rest;
+            $amount = $amount + $value;
+        } else {
+            //$value = 100 - $rest;
+            $amount = $amount - $rest;
+
+        }
+
+        //echo $amount; exit;
+        //$amount = $amount+0.99;
+        $amount = (float)$amount;
+        return $amount;
+    }
 
 
     private function paymentMail(){
