@@ -60,8 +60,50 @@ class IndexController extends AbstractActionController
        
        $industry = $this->getIndustryTable()->fetchAll();
        $jobrole = $this->getJobroleTable()->fetchAll();
+        //var_dump($jobrole->count()); exit;
        
         return new ViewModel(array("ret"=>$ret,"industry"=>$industry,"jobrole"=>$jobrole));
+    }
+
+    public function searchAction()
+    {
+        //echo "hdsgjshd"; exit;
+        $term = $this->params()->fromRoute('id');
+
+        echo $term ; exit;
+    }
+
+    public function linkAction()
+    {
+        //echo "hdsgjshd"; exit;
+        $term = $this->params()->fromRoute('term');
+        $id = $this->params()->fromRoute('id');
+
+
+
+
+        if($term=="ind"){
+            $ind = $this->getIndustryTable()->getIndById($id);
+
+            $term = $ind->Ind_Desc;
+
+        }
+
+        if($term == "role"){
+            $role = $this->getJobroleTable()->getRoleById($id);
+
+            $term = $role->Jobr_Desc;
+
+        }
+        //echo $id; exit;
+
+        //$term = base64_decode($term);
+
+        //encrypt
+
+        //echo $term ; exit;
+        return new ViewModel(array("term"=>$term));
+
     }
     
     

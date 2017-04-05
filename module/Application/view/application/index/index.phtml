@@ -72,7 +72,7 @@
                                                 
                                         ?>
                                         <!--<li><a href="#">Support Services<span>(34)</span></a></li> -->
-                                        <li><a href="#"><?php echo $i->Ind_Desc;?><span>(34)</span></a></li>
+                                        <li><a href="<?php  echo $this->url("index",array("action"=>"link","id"=>$i->Ind_Code,"term"=>"ind"))?>"><?php echo $i->Ind_Desc;?><span>(34)</span></a></li>
                                          <?php 
                                         }
                                         ?>
@@ -89,7 +89,7 @@
                                                 
                                         ?>
                                         <!--<li><a href="#">Support Services<span>(34)</span></a></li> -->
-                                        <li><a href="#"><?php echo $i->Ind_Desc;?><span>(34)</span></a></li>
+                                        <li><a href="<?php  echo $this->url("index",array("action"=>"link","id"=>$i->Ind_Code,"term"=>"ind"))?>"><?php echo $i->Ind_Desc;?><span>(34)</span></a></li>
                                          <?php 
                                         }
                                         ?>
@@ -132,7 +132,7 @@
                                     }
                                     $x++;
                                 }
-                                //var_dump(count($leftArray));
+                                //var_dump($roleLeftArray);
                                 //var_dump(count($rightArray));
                                 
                                 ?>
@@ -141,10 +141,11 @@
                                     <ul>
                                         <?php 
                                             foreach($roleLeftArray as $i){
+                                                //var_dump($i); exit;
                                                 
                                         ?>
                                         <!--<li><a href="#">Support Services<span>(34)</span></a></li> -->
-                                        <li><a href="#"><?php echo $i->Jobr_Desc;?><span>(34)</span></a></li>
+                                        <li><a href="<?php  echo $this->url("index",array("action"=>"link","id"=>$i->Jobr_Code,"term"=>"role"))?>"><?php echo $i->Jobr_Desc;?><span>(34)</span></a></li>
                                          <?php 
                                         }
                                         ?>
@@ -158,7 +159,7 @@
                                                 
                                         ?>
                                         <!--<li><a href="#">Support Services<span>(34)</span></a></li> -->
-                                        <li><a href="#"><?php echo $i->Jobr_Desc;?><span>(34)</span></a></li>
+                                        <li><a href="<?php  echo $this->url("index",array("action"=>"link","id"=>$i->Jobr_Code,"term"=>"role"))?>"><?php echo $i->Jobr_Desc;?><span>(34)</span></a></li>
                                          <?php 
                                                 }
                                         }
@@ -441,7 +442,7 @@
                 </div>   --->
                 <!--/Latest Jobs Block-->
                 <div class="clear"></div>
-                <!--Partners Block-->
+                <!--Partners Block
                 <div id="partners">
                     <div class="heading-l">
                         <h2> Our Partners </h2>

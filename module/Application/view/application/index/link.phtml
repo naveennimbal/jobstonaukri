@@ -1,0 +1,119 @@
+<?php
+
+?>
+
+<div id="content" style="min-height: 304px;">
+    <div id="title">
+        <h1 class="inner title-2">Jobs for <?php echo $term;?>
+
+        </h1>
+    </div>
+    <div class="inner">
+        <?php
+        //print_r($page);
+        //  var_dump($service);
+
+
+        ?>
+
+        <div class="content-inner">
+
+            <!-- Content Center -->
+            <div class="">
+
+
+                <div class="clear"></div>
+
+
+
+                <div class="clearfix"></div>
+                <div class="box-1 " id=""  style="height: 30em;;">
+
+                    <div style="margin: 2em; padding-top: 20px;">
+                        <h3> Sorry we didnt find any jobs in  <strong><?php echo $term ?></strong> </h3>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- /Content Center -->
+
+            <!-- Content Right
+            <div class="content-right">
+                <div class="block background" id="social-like">
+                    <h2 class="title-1">Share Us With Your Friends</h2>
+                    <div class="block-content">
+                        <div class="social-like linkedin"><a href="#" class="like-button">LinkedIn</a><span class="count">500</span></div>
+                        <div class="social-like motibu"><a href="#" class="like-button">Motibu</a><span class="count">2.7K</span></div>
+                        <div class="social-like facebook"><a href="#" class="like-button">Facebook</a><span class="count">1.3K</span></div>
+                        <div class="social-like twitter"><a href="#" class="like-button">Twitter</a><span class="count">868</span></div>
+                    </div>
+                </div>
+                <div class="block border" id="advertising">
+                    <div class="block-content"> <img alt="sidebarad" src="images/sb-ad.jpg">
+                        <!-- <div class="advertising-test">300x250<br/>
+                          Ad Banner</div>-->
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /Content Right -->
+
+            <div class="clear"></div>
+
+            <!-- Clear Line -->
+
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+
+      //  $("#paymentForm").submit(function(){
+
+            var amount = $("#amount").val() * 100;
+            var options = {
+                "key": "rzp_live_CA9GJIY8whc7DW",
+                "amount": amount,
+                "name": "ClickJobs",
+                "description": $("#description").val(),
+                //"image": "",
+                "handler": function (response){
+                    alert("Your Payment is sucessful");
+                },
+                "prefill": {
+                    "name": $("#custname").val(),
+                    "email": $("#custemail").val()
+                },
+                "notes": {
+                   // "address": $("#address").val()
+                },
+                "theme": {
+                    "color": "#F37254"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+
+          //  $("#makePayment").trigger("click",function(e){
+          //      rzp1.open();
+           //     e.preventDefault();
+           // });
+
+      //      return false;
+
+      //  });
+
+    })
+
+    </script>

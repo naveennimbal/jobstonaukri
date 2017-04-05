@@ -67,7 +67,24 @@ class IndustryTable
         return $this->tableGateway->update($Sqldata,array('user_id'=>$data->user_id));
         //var_dump($product); exit;
     }
-    
+
+    public function getIndById($id)
+    {
+
+        $sql = new Sql($this->tableGateway->adapter);
+        $select = $sql->select();
+        $select->from($this->tableGateway->getTable());
+        $select->where(array("Ind_Code"=>$id));
+        //$select->join('role', 'user.role_id = role.id', array('role' => 'name'));
+        //$select->join('group', 'user.group_id = group.id', array('group' => 'name'));
+
+        $resultSet = $this->tableGateway->selectWith($select);
+        return $resultSet->current();
+    }
+
+
+
+
     public function checkEmail($email) {
         
         $sql = new Sql($this->tableGateway->adapter);

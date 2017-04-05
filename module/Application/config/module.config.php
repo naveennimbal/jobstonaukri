@@ -139,6 +139,23 @@ return array(
                 ),
             ),
 
+            'index' => array(
+                'type' => 'Segment',
+                'options' => array(
+                    //'route' => '/index[/][:action][/][:id][/][:term]',
+                    'route' => '/index[/][:action][/:id][/:term]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id' => '[0-9]+',
+                        'term' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Index',
+                        'action' => 'index',
+                    ),
+                ),
+            ),
+
             'backoffice' => array(
                 'type' => 'segment',
                 'options' => array(
@@ -155,20 +172,7 @@ return array(
             ),
 
 
-            'index' => array(
-                'type' => 'segment',
-                'options' => array(
-                    'route' => '/index[/][:action][/:id]',
-                    'constraints' => array(
-                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                        'id' => '[0-9]+',
-                    ),
-                    'defaults' => array(
-                        'controller' => 'Application\Controller\Index',
-                        'action' => 'index',
-                    ),
-                ),
-            ),
+
 
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
